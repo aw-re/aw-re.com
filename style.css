@@ -72,6 +72,19 @@ a {
   text-decoration: none;
   color: inherit;
 }
+button, input, textarea {
+  font: inherit;
+}
+button {
+  color: inherit;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
 ul {
   list-style: none;
 }
@@ -278,6 +291,11 @@ ul {
 .hamburger {
   display: none;
   font-size: 2rem;
+  background: transparent;
+  border: 0;
+  line-height: 1;
+  padding: 6px;
+  color: var(--text-main);
 }
 
 /* Hero Section */
@@ -455,7 +473,7 @@ ul {
 /* Skills Section */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 30px;
 }
 .skill-card {
@@ -640,43 +658,26 @@ ul {
 .contact-info p {
   color: var(--text-muted);
   margin-bottom: 40px;
-}
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: var(--transition);
-}
-.contact-item:hover {
-  transform: translateX(10px);
-  color: var(--accent-color);
-}
-.contact-item:hover .icon-box {
-  background: var(--accent-color);
-  color: #000;
-  box-shadow: 0 0 15px var(--accent-glow);
-}
-.icon-box {
-  width: 50px;
-  height: 50px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  transition: var(--transition);
+  max-width: 560px;
 }
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.form-group {
+  position: relative;
+}
+.form-group label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 .form-group input, .form-group textarea {
   width: 100%;
@@ -691,14 +692,21 @@ ul {
   appearance: none;
 }
 .form-group input:focus, .form-group textarea:focus {
-  outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
 }
 .submit-btn {
   width: 100%;
   justify-content: center;
   padding: 15px;
+}
+.submit-btn:disabled {
+  opacity: 0.7;
+  pointer-events: none;
 }
 .form-status {
   margin-top: 15px;
@@ -711,6 +719,10 @@ ul {
   transform: translateY(10px);
   transition: all 0.4s ease;
 }
+.form-status i {
+  margin-right: 8px;
+  vertical-align: middle;
+}
 .form-status.success {
   display: block;
   opacity: 1;
@@ -719,6 +731,14 @@ ul {
   border: 1px solid var(--accent-glow);
   color: var(--accent-color);
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+}
+.form-status.error {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 99, 99, 0.08);
+  border: 1px solid rgba(255, 99, 99, 0.35);
+  color: #ffb4b4;
 }
 .form-status.sending {
   display: block;
@@ -737,7 +757,7 @@ footer {
 }
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 40px;
 }
@@ -745,10 +765,6 @@ footer {
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
-}
-.social-links {
-  display: flex;
-  gap: 15px;
 }
 .glass-icon {
   width: 45px;
@@ -868,7 +884,7 @@ footer {
   
   /* Contact tweaks */
   .contact-info { text-align: center; }
-  .contact-item { justify-content: center; }
+  .contact-info p { margin-left: auto; margin-right: auto; }
   
   /* Footer tweaks */
   .footer-content { flex-direction: column; gap: 20px; text-align: center; }
@@ -890,89 +906,20 @@ footer {
     overflow: hidden;
 }
 
-/* Floating WhatsApp Button */
-.whatsapp-fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: rgba(37, 211, 102, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 2.2rem;
-    z-index: 999;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: scale(0.5) translateY(50px);
-}
-
-.whatsapp-fab.show {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-.whatsapp-fab:hover {
-    background: #25d366;
-    color: #000;
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-}
-
-/* FAB Pulse Animation */
-.whatsapp-fab::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    border-radius: 50%;
-    z-index: -1;
-    animation: fab-pulse 2s infinite;
-}
-
-@keyframes fab-pulse {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
-
-/* Tooltip for FAB */
-.fab-tooltip {
-    position: absolute;
-    right: 75px;
-    background: var(--bg-darker);
-    color: var(--text-main);
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(10px);
-    pointer-events: none;
-    transition: all 0.3s ease;
-    border: 1px solid var(--glass-border);
-}
-
-.whatsapp-fab:hover .fab-tooltip {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-@media (max-width: 768px) {
-    .whatsapp-fab {
-        bottom: 20px;
-        right: 20px;
-        width: 55px;
-        height: 55px;
-        font-size: 2rem;
-    }
-    .fab-tooltip { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
 }

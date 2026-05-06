@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. Loading Screen ---
     const loader = document.getElementById('loader');
-    setTimeout(() => {
+    if (loader) setTimeout(() => {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.style.display = 'none';
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Activate custom cursor robustly on first mouse move
     let customCursorInitialized = false;
 
+    if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
     window.addEventListener('mousemove', (e) => {
         if (!customCursorInitialized) {
             document.body.classList.add('has-custom-cursor');
@@ -50,22 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorOutline.style.backgroundColor = 'transparent';
         });
     });
+    }
 
-    // --- 3. Email Obfuscation & Inject ---
-    const emailUser = 'abdulwahab';
-    const emailDomain = 'aw-re.com';
-    const fullEmail = `${emailUser}@${emailDomain}`;
-    
-    const emailText = document.getElementById('email-text');
-    const emailLink = document.getElementById('email-link');
-    const footerEmail = document.getElementById('footer-email');
-
-    if (emailText) emailText.textContent = fullEmail;
-    if (emailLink) emailLink.href = `mailto:${fullEmail}`;
-    if (footerEmail) footerEmail.href = `mailto:${fullEmail}`;
-
-    // --- 4. Auto Update Year ---
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // --- 3. Auto Update Year ---
+    const year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
 
     // --- 4. Navbar Scroll & Mobile Menu ---
     const navbar = document.getElementById('navbar');
@@ -75,26 +65,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
+            if (navbar) navbar.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled');
+            if (navbar) navbar.classList.remove('scrolled');
         }
         highlightActiveSection();
     });
 
-    hamburger.addEventListener('click', () => {
+    if (hamburger && navLinksList) hamburger.addEventListener('click', () => {
         navLinksList.classList.toggle('active');
-        document.body.style.overflow = navLinksList.classList.contains('active') ? 'hidden' : 'auto';
-        hamburger.innerHTML = navLinksList.classList.contains('active') 
+        const isOpen = navLinksList.classList.contains('active');
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        hamburger.innerHTML = isOpen 
             ? "<i class='bx bx-x'></i>" 
             : "<i class='bx bx-menu'></i>";
     });
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            navLinksList.classList.remove('active');
+            if (navLinksList) navLinksList.classList.remove('active');
             document.body.style.overflow = 'auto';
-            hamburger.innerHTML = "<i class='bx bx-menu'></i>";
+            if (hamburger) {
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'Open navigation menu');
+                hamburger.innerHTML = "<i class='bx bx-menu'></i>";
+            }
         });
     });
 
@@ -107,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollPos > section.offsetTop && scrollPos < (section.offsetTop + section.offsetHeight)) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (section.getAttribute('id') === link.getAttribute('href').substring(1)) {
+                    const href = link.getAttribute('href') || '';
+                    if (section.getAttribute('id') === href.substring(1)) {
                         link.classList.add('active');
                     }
                 });
@@ -116,16 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 6. Typed.js Initialization ---
-    const typed = new Typed('.typed-text', {
-        strings: ['IT &amp; AI Solutions Specialist', 'Workflow Automation Expert', 'Problem Solver'],
-        typeSpeed: 50,
-        backSpeed: 30,
-        backDelay: 2000,
-        loop: true,
-        cursorChar: '_'
-    });
+    const typedText = document.querySelector('.typed-text');
+    if (typedText && window.Typed) {
+        new Typed('.typed-text', {
+            strings: ['IT &amp; AI Solutions Specialist', 'Workflow Automation Expert', 'Problem Solver'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true,
+            cursorChar: '_'
+        });
+    } else if (typedText) {
+        typedText.textContent = 'IT & AI Solutions Specialist';
+    }
 
     // --- 7. tsParticles Initialization ---
+    if (window.tsParticles && document.getElementById('tsparticles')) {
     tsParticles.load("tsparticles", {
         fpsLimit: 60,
         background: {
@@ -169,9 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         detectRetina: true
     });
+    }
 
     // --- 8. AOS Initialization (Scroll Animations) ---
-    AOS.init({
+    if (window.AOS) AOS.init({
         duration: 800,
         once: false,
         mirror: true,
@@ -248,49 +253,99 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 12. Contact Form Integration Simulation ---
+    // --- 12. Private Contact Form Integration ---
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
+    const contactStartedAt = document.getElementById('contactStartedAt');
+
+    const resetContactTimer = () => {
+        if (contactStartedAt) contactStartedAt.value = String(Date.now());
+    };
+
+    const setFormStatus = (type, message, iconClass) => {
+        if (!formStatus) return;
+        formStatus.className = `form-status ${type}`;
+        formStatus.replaceChildren();
+
+        const icon = document.createElement('i');
+        icon.className = iconClass;
+        icon.setAttribute('aria-hidden', 'true');
+
+        const text = document.createElement('span');
+        text.textContent = message;
+
+        formStatus.append(icon, text);
+    };
+
+    const setSubmitState = (isSending) => {
+        if (!submitBtn) return;
+        submitBtn.disabled = isSending;
+        submitBtn.setAttribute('aria-busy', String(isSending));
+    };
     
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        resetContactTimer();
+
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Honeypot Check
-            const honeypot = document.getElementById('b_name').value;
-            if (honeypot) {
-                console.warn("Spam detected via Honeypot.");
-                // Quietly fail or show fake success to confuse the bot
-                formStatus.className = 'form-status success';
-                formStatus.innerHTML = "<i class='bx bx-check-circle'></i> Message Sent Successfully!";
-                contactForm.reset();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
                 return;
             }
 
-            formStatus.className = 'form-status sending';
-            formStatus.innerHTML = "<i class='bx bx-loader-alt bx-spin' style='margin-right: 8px;'></i> Sending your message...";
-            submitBtn.style.opacity = '0.7';
-            submitBtn.style.pointerEvents = 'none';
-
-            // Simulate form processing
-            setTimeout(() => {
-                formStatus.className = 'form-status success';
-                formStatus.innerHTML = "<i class='bx bx-check-circle' style='font-size: 1.2rem; margin-right: 8px; vertical-align: middle;'></i> Message Sent Successfully!";
+            const formData = new FormData(contactForm);
+            const honeypot = String(formData.get('company') || '').trim();
+            if (honeypot) {
+                setFormStatus('success', 'Message sent successfully.', 'bx bx-check-circle');
                 contactForm.reset();
-                submitBtn.style.opacity = '1';
-                submitBtn.style.pointerEvents = 'auto';
+                resetContactTimer();
+                return;
+            }
+
+            setSubmitState(true);
+            setFormStatus('sending', 'Sending your message...', 'bx bx-loader-alt bx-spin');
+
+            const payload = {
+                name: String(formData.get('name') || '').trim(),
+                email: String(formData.get('email') || '').trim(),
+                message: String(formData.get('message') || '').trim(),
+                company: honeypot,
+                started_at: String(formData.get('started_at') || '')
+            };
+
+            try {
+                const endpoint = contactForm.getAttribute('action') || '/api/contact';
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                let result = {};
+                try {
+                    result = await response.json();
+                } catch (_) {
+                    result = {};
+                }
+
+                if (!response.ok || result.ok === false) {
+                    throw new Error(result.message || 'Unable to send message right now.');
+                }
+
+                setFormStatus('success', 'Message sent successfully.', 'bx bx-check-circle');
+                contactForm.reset();
+                resetContactTimer();
 
                 setTimeout(() => {
                     formStatus.className = 'form-status';
                 }, 5000);
-            }, 1800);
+            } catch (error) {
+                setFormStatus('error', error.message || 'Unable to send message right now.', 'bx bx-error-circle');
+            } finally {
+                setSubmitState(false);
+            }
         });
     }
-
-    // --- 13. WhatsApp FAB Show Delay ---
-    const whatsappFab = document.querySelector('.whatsapp-fab');
-    setTimeout(() => {
-        if (whatsappFab) whatsappFab.classList.add('show');
-    }, 2500);
 });
