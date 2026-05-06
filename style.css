@@ -171,7 +171,7 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 30px;
   transition: var(--transition);
 }
@@ -249,7 +249,7 @@ ul {
 }
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 24px;
   align-items: center;
 }
 .nav-link {
@@ -468,6 +468,148 @@ ul {
   margin: 5px 0 0;
   font-size: 0.9rem;
   color: var(--text-main);
+}
+
+/* Projects Section */
+.projects {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0)),
+    var(--bg-color);
+}
+.github-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  max-width: 760px;
+  margin: -1rem auto 32px;
+  padding: 20px 24px;
+}
+.summary-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 3px;
+}
+.github-summary strong {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+}
+.summary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-color);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.project-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 34px;
+}
+.filter-btn {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  color: var(--text-muted);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  color: #001019;
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.18);
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+  gap: 24px;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 370px;
+  padding: 26px;
+  overflow: hidden;
+}
+.project-card.is-hidden {
+  display: none;
+}
+.project-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.project-type,
+.project-language {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.project-type {
+  color: var(--accent-color);
+}
+.project-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 12px;
+}
+.project-card p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 22px;
+}
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  margin-bottom: 22px;
+}
+.project-stack span {
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 18px;
+}
+.project-meta {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-color);
+  font-weight: 800;
+  white-space: nowrap;
+}
+.project-link i {
+  font-size: 1.15rem;
+  transition: transform 0.2s ease;
+}
+.project-link:hover i {
+  transform: translateX(3px);
 }
 
 /* Skills Section */
@@ -853,6 +995,7 @@ footer {
   .nav-links.active li:nth-child(4) .nav-link { transition-delay: 0.4s; }
   .nav-links.active li:nth-child(5) .nav-link { transition-delay: 0.5s; }
   .nav-links.active li:nth-child(6) .nav-link { transition-delay: 0.6s; }
+  .nav-links.active li:nth-child(7) .nav-link { transition-delay: 0.7s; }
   .active-btn { border: none; padding: 0; background: transparent; }
 
   /* Hero Tweaks */
@@ -874,6 +1017,9 @@ footer {
 
   /* Grids & Cards */
   .stats-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 30px; }
+  .github-summary { flex-direction: column; text-align: center; margin-top: 0; }
+  .project-card { min-height: auto; }
+  .project-footer { flex-direction: column; align-items: flex-start; }
   .timeline::before { left: 15px; }
   .timeline-item { padding-left: 50px; }
   .timeline-dot { left: 6px; width: 16px; height: 16px; }

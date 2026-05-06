@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedText = document.querySelector('.typed-text');
     if (typedText && window.Typed) {
         new Typed('.typed-text', {
-            strings: ['IT &amp; AI Solutions Specialist', 'Workflow Automation Expert', 'Problem Solver'],
+            strings: ['Software Developer', 'Laravel & Flutter Builder', 'AI Solutions Specialist'],
             typeSpeed: 50,
             backSpeed: 30,
             backDelay: 2000,
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorChar: '_'
         });
     } else if (typedText) {
-        typedText.textContent = 'IT & AI Solutions Specialist';
+        typedText.textContent = 'Software Developer';
     }
 
     // --- 7. tsParticles Initialization ---
@@ -230,7 +230,74 @@ document.addEventListener('DOMContentLoaded', () => {
         skillsObserver.observe(bar);
     });
 
-    // --- 11. Magnetic Buttons (Desktop UX) ---
+    // --- 11. Projects Filtering & GitHub Metadata ---
+    const projectCards = document.querySelectorAll('.project-card');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const activeFilter = button.dataset.filter || 'all';
+
+            filterButtons.forEach(filterButton => {
+                const isActive = filterButton === button;
+                filterButton.classList.toggle('active', isActive);
+                filterButton.setAttribute('aria-pressed', String(isActive));
+            });
+
+            projectCards.forEach(card => {
+                const categories = (card.dataset.category || '').split(' ');
+                const shouldShow = activeFilter === 'all' || categories.includes(activeFilter);
+                card.classList.toggle('is-hidden', !shouldShow);
+            });
+        });
+    });
+
+    const formatDate = (dateString) => {
+        if (!dateString) return 'Updated on GitHub';
+        return new Intl.DateTimeFormat('en', {
+            month: 'short',
+            year: 'numeric'
+        }).format(new Date(dateString));
+    };
+
+    const hydrateGitHubProjects = async () => {
+        if (!projectCards.length || !window.fetch) return;
+
+        try {
+            const response = await fetch('https://api.github.com/users/aw-re/repos?sort=updated&per_page=100', {
+                headers: { Accept: 'application/vnd.github+json' }
+            });
+
+            if (!response.ok) return;
+
+            const repos = await response.json();
+            const reposByName = new Map(repos.map(repo => [repo.name, repo]));
+            const repoCount = document.getElementById('githubRepoCount');
+
+            if (repoCount) repoCount.textContent = `${repos.length} public repositories`;
+
+            projectCards.forEach(card => {
+                const repo = reposByName.get(card.dataset.repo);
+                if (!repo) return;
+
+                const language = card.querySelector('.project-language');
+                const updated = card.querySelector('[data-project-meta="updated"]');
+
+                if (language && repo.language) language.textContent = repo.language;
+                if (updated) {
+                    const stars = Number(repo.stargazers_count || 0);
+                    const starText = stars === 1 ? '1 star' : `${stars} stars`;
+                    updated.textContent = `${formatDate(repo.pushed_at || repo.updated_at)} · ${starText}`;
+                }
+            });
+        } catch (_) {
+            // Static project content remains available when GitHub is unreachable.
+        }
+    };
+
+    hydrateGitHubProjects();
+
+    // --- 12. Magnetic Buttons (Desktop UX) ---
     const magneticElements = document.querySelectorAll('.magnetic');
     
     if (window.matchMedia("(pointer: fine)").matches) {
@@ -253,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 12. Private Contact Form Integration ---
+    // --- 13. Private Contact Form Integration ---
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');

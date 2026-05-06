@@ -19,6 +19,18 @@
     <meta name="twitter:title" content="Abdulwahab Al-Reyashi | IT & AI Solutions Specialist">
     <meta name="twitter:description" content="Portfolio of Abdulwahab Al-Reyashi, an IT & AI Solutions Specialist. Turning complex problems into smart, automated solutions.">
     <meta name="twitter:image" content="https://aw-re.com/Profile%20picture%20.jpeg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Abdulwahab Al-Reyashi",
+      "url": "https://aw-re.com/",
+      "image": "https://aw-re.com/Profile%20picture%20.jpeg",
+      "jobTitle": "IT & AI Solutions Specialist",
+      "sameAs": ["https://github.com/aw-re"],
+      "knowsAbout": ["Artificial Intelligence", "Workflow Automation", "Laravel", "Flutter", "React", "IT Support"]
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -55,6 +67,7 @@
             <a href="#" class="nav-logo">aw-re<span class="dot">.</span></a>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
@@ -79,8 +92,8 @@
             <h2 class="hero-subtitle">I am a <span class="typed-text"></span></h2>
             <p class="hero-tagline">Turning complex problems into smart, automated solutions.</p>
             <div class="hero-cta">
-                <a href="https://github.com/aw-re" target="_blank" rel="noopener noreferrer" class="btn btn-outline magnetic" data-aos="fade-right" data-aos-delay="200">
-                    <i class='bx bxl-github'></i> View My Work
+                <a href="#projects" class="btn btn-outline magnetic" data-aos="fade-right" data-aos-delay="200">
+                    <i class='bx bx-code-alt'></i> Explore Projects
                 </a>
                 <a href="#contact" class="btn btn-primary magnetic" data-aos="fade-left" data-aos-delay="200">
                     <i class='bx bx-envelope'></i> Contact Me
@@ -104,9 +117,9 @@
                     <img src="Profile%20picture%20.jpeg" alt="Abdulwahab setup" class="about-img" loading="lazy">
                 </div>
                 <div class="about-text" data-aos="fade-left">
-                    <h3>IT & AI Solutions Specialist based in Sana'a, Yemen</h3>
-                    <p>I am a passionate and driven IT & AI Solutions Specialist focused on workflow automation, system improvement, and solving complex technical challenges. I thrive in environments where technology can be leveraged to streamline operations and enhance productivity.</p>
-                    <p>My expertise bridges the gap between traditional IT infrastructure and cutting-edge artificial intelligence, allowing me to build robust, forward-thinking solutions.</p>
+                    <h3>Software Developer & AI-focused problem solver</h3>
+                    <p>I build practical web and mobile solutions with a strong focus on automation, AI-powered workflows, and business systems that are easy to use and maintain.</p>
+                    <p>My work combines Laravel, Flutter, React, and modern frontend engineering with hands-on IT support experience, helping me design solutions that feel polished and solve real operational problems.</p>
                     
                     <div class="stats-grid">
                         <div class="stat-item glass-card">
@@ -123,6 +136,140 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Projects<span class="dot">.</span></h2>
+            <p class="section-subtitle" data-aos="fade-up">Selected public work from GitHub, focused on AI, full-stack apps, and business systems.</p>
+
+            <div class="github-summary glass-card" id="githubSummary" data-aos="fade-up">
+                <div>
+                    <span class="summary-label">GitHub</span>
+                    <strong id="githubRepoCount">7 public repositories</strong>
+                </div>
+                <a href="https://github.com/aw-re" target="_blank" rel="noopener noreferrer" class="summary-link">
+                    <i class='bx bxl-github'></i>
+                    View profile
+                </a>
+            </div>
+
+            <div class="project-filters" aria-label="Project filters" data-aos="fade-up">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" type="button" data-filter="ai" aria-pressed="false">AI</button>
+                <button class="filter-btn" type="button" data-filter="fullstack" aria-pressed="false">Full-stack</button>
+                <button class="filter-btn" type="button" data-filter="laravel" aria-pressed="false">Laravel</button>
+                <button class="filter-btn" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card glass-card" data-category="ai frontend" data-repo="mantiq-ai" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-topline">
+                        <span class="project-type">AI News Platform</span>
+                        <span class="project-language">TypeScript</span>
+                    </div>
+                    <h3>Mantiq AI</h3>
+                    <p>Arabic-first AI news and model discovery platform with a dark editorial interface, admin dashboard, RTL support, and persistent local state.</p>
+                    <div class="project-stack">
+                        <span>React</span>
+                        <span>TypeScript</span>
+                        <span>Vite</span>
+                        <span>Zustand</span>
+                    </div>
+                    <div class="project-footer">
+                        <span class="project-meta" data-project-meta="updated">Updated on GitHub</span>
+                        <a href="https://github.com/aw-re/mantiq-ai" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Repository <i class='bx bx-right-arrow-alt'></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card" data-category="fullstack frontend" data-repo="Home-Bites" data-aos="fade-up" data-aos-delay="150">
+                    <div class="project-topline">
+                        <span class="project-type">Digital Catalog</span>
+                        <span class="project-language">JavaScript</span>
+                    </div>
+                    <h3>Home Bites</h3>
+                    <p>Full-stack catalog for home-based food businesses with dish filtering, family profiles, SQLite persistence, and direct ordering flow.</p>
+                    <div class="project-stack">
+                        <span>React</span>
+                        <span>Express</span>
+                        <span>SQLite</span>
+                        <span>Tailwind</span>
+                    </div>
+                    <div class="project-footer">
+                        <span class="project-meta" data-project-meta="updated">Updated on GitHub</span>
+                        <a href="https://github.com/aw-re/Home-Bites" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Repository <i class='bx bx-right-arrow-alt'></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card" data-category="laravel fullstack" data-repo="nova-track" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-topline">
+                        <span class="project-type">Construction CPMS</span>
+                        <span class="project-language">Blade</span>
+                    </div>
+                    <h3>NovaTrack</h3>
+                    <p>Laravel construction project management system with bilingual Arabic/English UI, role-based dashboards, and a refined glassmorphism interface.</p>
+                    <div class="project-stack">
+                        <span>Laravel</span>
+                        <span>Blade</span>
+                        <span>MySQL</span>
+                        <span>RBAC</span>
+                    </div>
+                    <div class="project-footer">
+                        <span class="project-meta" data-project-meta="updated">Updated on GitHub</span>
+                        <a href="https://github.com/aw-re/nova-track" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Repository <i class='bx bx-right-arrow-alt'></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card" data-category="frontend fullstack" data-repo="construction-project-management" data-aos="fade-up" data-aos-delay="250">
+                    <div class="project-topline">
+                        <span class="project-type">Project Dashboard</span>
+                        <span class="project-language">TypeScript</span>
+                    </div>
+                    <h3>Construction Project Management</h3>
+                    <p>React and TypeScript frontend for construction teams with role-based access, Kanban task boards, Redux state, and responsive workflows.</p>
+                    <div class="project-stack">
+                        <span>React</span>
+                        <span>TypeScript</span>
+                        <span>Redux</span>
+                        <span>Material UI</span>
+                    </div>
+                    <div class="project-footer">
+                        <span class="project-meta" data-project-meta="updated">Updated on GitHub</span>
+                        <a href="https://github.com/aw-re/construction-project-management" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Repository <i class='bx bx-right-arrow-alt'></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card" data-category="frontend" data-repo="aw-re.com" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-topline">
+                        <span class="project-type">Portfolio System</span>
+                        <span class="project-language">CSS</span>
+                    </div>
+                    <h3>aw-re.com</h3>
+                    <p>Personal portfolio built as a fast static site with animated interactions, private contact routing, and a polished single-page experience.</p>
+                    <div class="project-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Serverless</span>
+                    </div>
+                    <div class="project-footer">
+                        <span class="project-meta" data-project-meta="updated">Updated on GitHub</span>
+                        <a href="https://github.com/aw-re/aw-re.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Repository <i class='bx bx-right-arrow-alt'></i>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -156,7 +303,7 @@
                 <div class="skill-card glass-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="skill-header">
                         <i class='bx bx-globe'></i>
-                        <h3>Website Management</h3>
+                        <h3>Laravel & Web Apps</h3>
                     </div>
                     <div class="progress-wrap">
                         <div class="progress-bar" data-progress="80%"></div>
@@ -166,7 +313,7 @@
                 <div class="skill-card glass-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="skill-header">
                         <i class='bx bx-wrench'></i>
-                        <h3>IT Support & T-Shooting</h3>
+                        <h3>IT Support & Troubleshooting</h3>
                     </div>
                     <div class="progress-wrap">
                         <div class="progress-bar" data-progress="95%"></div>
@@ -175,8 +322,8 @@
 
                 <div class="skill-card glass-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="skill-header">
-                        <i class='bx bx-server'></i>
-                        <h3>System Improvement</h3>
+                        <i class='bx bx-mobile-alt'></i>
+                        <h3>Flutter & Mobile Apps</h3>
                     </div>
                     <div class="progress-wrap">
                         <div class="progress-bar" data-progress="88%"></div>

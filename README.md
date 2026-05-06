@@ -1,6 +1,10 @@
 # aw-re.com
 
-Static personal portfolio with a private contact form.
+Static personal portfolio with featured GitHub projects and a private contact form.
+
+## Projects
+
+Featured projects are rendered from curated static content in `index.html` and enhanced in the browser with public GitHub metadata from `https://api.github.com/users/aw-re/repos`. If GitHub is unavailable, the static project cards remain visible.
 
 ## Contact Form
 
