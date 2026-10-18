@@ -3075,7 +3075,8 @@ html[dir="rtl"] .pillar p {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 370px;
+    max-width: 240px;
+    justify-self: center;
   }
   .founder-grid h2 {
     font-size: 29px;
