@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import { Locale, services, t, tr } from "@/data/site";
+import { companyContact } from "@/data/contact";
 import { validateContact, FieldErrors } from "@/lib/contact";
 export default function ContactForm({
   locale: l,
@@ -65,8 +66,8 @@ export default function ContactForm({
           result.code === "not_configured"
             ? tr(
                 l,
-                "The form is temporarily unavailable. Please email abdulwahab@aw-re.com or contact us on WhatsApp.",
-                "النموذج غير متاح مؤقتًا. راسلنا على abdulwahab@aw-re.com أو تواصل عبر واتساب.",
+                `The form is temporarily unavailable. Please email ${companyContact.email} or contact us on WhatsApp.`,
+                `النموذج غير متاح مؤقتًا. راسلنا على ${companyContact.email} أو تواصل عبر واتساب.`,
               )
             : tr(
                 l,

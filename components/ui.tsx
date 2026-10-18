@@ -18,10 +18,9 @@ import {
   Globe,
   Github,
   MessageCircle,
-  Linkedin,
-  Youtube,
 } from "lucide-react";
 import { Locale, tr } from "@/data/site";
+import { companyContact } from "@/data/contact";
 const icons = {
   code: CodeXml,
   bot: Bot,
@@ -129,17 +128,17 @@ export function PageHero({
 export function ContactDetails({ locale }: { locale: Locale }) {
   return (
     <address className="contact-details">
-      <a href="mailto:abdulwahab@aw-re.com">
+      <a href={`mailto:${companyContact.email}`}>
         <Mail size={17} />
-        <span>abdulwahab@aw-re.com</span>
+        <span dir="ltr">{companyContact.email}</span>
       </a>
       <a
-        href="https://wa.me/967735898777"
+        href={companyContact.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
       >
         <Phone size={17} />
-        <span dir="ltr">+967 735 898 777</span>
+        <span dir="ltr">{companyContact.phoneDisplay}</span>
         <ArrowUpRight size={13} />
       </a>
       <a href="https://aw-re.com">
@@ -165,25 +164,13 @@ export function Socials({ locale }: { locale: Locale }) {
         <Github size={18} />
       </a>
       <a
-        href="https://wa.me/967735898777"
+        href={companyContact.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={tr(locale, "WhatsApp", "واتساب")}
       >
         <MessageCircle size={18} />
       </a>
-      <span
-        className="social-placeholder"
-        title={tr(locale, "LinkedIn — coming soon", "لينكدإن — قريبًا")}
-      >
-        <Linkedin size={18} />
-      </span>
-      <span
-        className="social-placeholder"
-        title={tr(locale, "YouTube — coming soon", "يوتيوب — قريبًا")}
-      >
-        <Youtube size={18} />
-      </span>
     </div>
   );
 }

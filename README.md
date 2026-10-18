@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-The root redirects to `/en`. Arabic is at `/ar`; the language switch preserves the current page, including project pages. Standard pages are Home, Services, Projects, About, and Contact. Project data lives in `data/site.ts`; reusable UI and illustrations live in `components/`.
+The root redirects to `/en`. Arabic is at `/ar`; the language switch preserves the current page, including project pages. Standard pages are Home, Services, Projects, About, and Contact. Project data lives in `data/site.ts`, concise homepage copy in `data/home.ts`, and public contact details in `data/contact.ts`. Reusable UI and illustrations live in `components/`.
 
 ```sh
 npm run lint
@@ -35,7 +35,7 @@ The test configuration uses `/usr/bin/chromium` when available and otherwise the
 The existing Resend integration has been migrated to `app/api/contact/route.ts`. Set these in the hosting provider's secure environment configuration (or an ignored `.env.local` file):
 
 - `RESEND_API_KEY`: Resend API credential.
-- `CONTACT_TO_EMAIL`: actual destination inbox.
+- `CONTACT_TO_EMAIL`: actual destination inbox; set this to `info@aw-re.com` in hosting settings for company enquiries.
 - `CONTACT_FROM_EMAIL`: a sender on your verified Resend domain.
 - `CONTACT_SUBJECT_PREFIX`: optional enquiry subject prefix.
 
@@ -43,7 +43,7 @@ Never commit real values. `.env.example` documents the names only. The form retu
 
 ## Content and visuals
 
-The three project summaries and technology labels follow the supplied brief. Dashboard compositions are original HTML/CSS illustrations, explicitly identified as illustrations on the projects and detail pages. They are not customer screenshots. Case-study descriptions and results must be replaced with approved project information; no metrics or testimonials are invented. LinkedIn and YouTube remain noninteractive placeholders until real URLs are provided. GitHub and WhatsApp are linked.
+The three project summaries and technology labels follow the supplied brief. Dashboard compositions are original HTML/CSS illustrations, explicitly identified as illustrations on the projects and detail pages. They are not customer screenshots. Case-study descriptions and results must be replaced with approved project information; no metrics or testimonials are invented. Only the configured GitHub and WhatsApp social links are displayed.
 
 The supplied About-page portrait is stored at `public/images/abdulwahab-al-reyashi.jpg`; responsive framing preserves its natural colors and keeps the face visible. The wordmark in `public/brand/aw-re-tech.png` is a transparent rendition prepared from the supplied company logo. `Logo` in `components/ui.tsx` is shared by the header, footer, and hero/about illustrations. CSS frames its visible artwork without stretching it or reversing its lettering in RTL. The original raster still contains edge texture; replace it with the original clean SVG export when available for exact vector fidelity.
 

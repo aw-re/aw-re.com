@@ -144,7 +144,7 @@ html[dir="rtl"] .direction-arrow {
   min-height: 46px;
   padding: 12px 23px;
   border: 1px solid transparent;
-  border-radius: 40px;
+  border-radius: 7px;
   background: var(--accent);
   color: #10170a;
   font-size: 12px;
@@ -422,184 +422,33 @@ html[dir="rtl"] .direction-arrow {
   inset-inline-end: -8%;
   width: 69%;
   pointer-events: none;
-  perspective: 1200px;
+  isolation: isolate;
 }
-.art-grid {
+.hero-art-media {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(#ffffff05 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff05 1px, transparent 1px);
-  background-size: 75px 75px;
-  transform: rotate(-12deg) skewY(-8deg);
-  mask-image: radial-gradient(ellipse, #0008, transparent 68%);
+  mask-image: linear-gradient(90deg, transparent, #000 18%);
 }
-.orbital-line {
-  width: 750px;
-  height: 750px;
-  border: 1px solid #b6ff3b0b;
-  border-radius: 50%;
-  position: absolute;
-  top: -340px;
-  left: 30px;
+.hero-art-image {
+  object-fit: cover;
+  object-position: 65% center;
 }
-.orbital-line:after {
+.hero-art::after {
   content: "";
   position: absolute;
-  inset: 60px;
-  border: 1px solid #b6ff3b0b;
-  border-radius: 50%;
+  inset: 0;
+  background: linear-gradient(180deg, #080d0b00 65%, #080d0b 100%);
+  z-index: 1;
 }
-.terrain {
+.hero-art-brand {
   position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  height: 55%;
-  background:
-    repeating-linear-gradient(
-      165deg,
-      transparent 0 6px,
-      #687a7033 7px,
-      transparent 8px
-    ),
-    linear-gradient(10deg, #050a07, #1d2a23);
-  clip-path: polygon(
-    0 60%,
-    8% 46%,
-    18% 60%,
-    29% 35%,
-    37% 51%,
-    45% 16%,
-    53% 32%,
-    60% 20%,
-    69% 42%,
-    77% 30%,
-    90% 0,
-    100% 14%,
-    100% 100%,
-    0 100%
-  );
-}
-.terrain-back {
-  height: 76%;
-  opacity: 0.4;
-  transform: scaleX(-1);
-  bottom: 6%;
-}
-.terrain-front {
-  height: 31%;
-  bottom: -3px;
-  z-index: 4;
-  background:
-    repeating-linear-gradient(
-      169deg,
-      transparent 0 8px,
-      #62736925 9px,
-      transparent 10px
-    ),
-    linear-gradient(10deg, #050907, #17251d);
-  mask-image: linear-gradient(90deg, transparent, #000 40%);
-}
-.brand-beam {
-  position: absolute;
-  top: 32%;
-  left: -8%;
-  height: 50px;
-  width: 130%;
-  background: linear-gradient(90deg, #b6ff3b00, #9add25 35%, #c3f66a);
-  transform: rotate(-31deg);
-  box-shadow: 0 0 35px #b6ff3b20;
+  top: 28px;
+  inset-inline-end: 12%;
+  z-index: 2;
   opacity: 0.9;
 }
-.laptop {
-  position: absolute;
-  width: 490px;
-  height: 330px;
-  inset-inline-end: 8%;
-  top: 18%;
-  transform: rotate(-7deg) skewX(-10deg);
-  z-index: 2;
-  filter: drop-shadow(0 25px 25px #0008);
-}
-.laptop-screen {
-  height: 94%;
-  border: 2px solid #738279;
-  border-radius: 13px 13px 3px 3px;
-  background: linear-gradient(130deg, #1e2823, #070c09 55%);
-  position: relative;
-  overflow: hidden;
-  box-shadow:
-    inset 0 0 0 8px #050806,
-    0 0 0 1px #000;
-}
-.camera {
-  position: absolute;
-  top: 3px;
-  left: 44%;
-  height: 6px;
-  width: 70px;
-  background: #020403;
-  border-radius: 0 0 7px 7px;
-}
-.screen-glint {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, #ffffff0b, transparent 50%);
-}
-.screen-brand {
-  position: absolute;
-  top: 30%;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 22px;
-  z-index: 2;
-}
-.screen-brand .logo {
-  width: 190px;
-}
-
-.screen-tagline {
-  font-size: 7px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  display: flex;
-  gap: 12px;
-  direction: ltr;
-}
-.screen-tagline b {
-  color: var(--accent);
-  font-size: 10px;
-}
-.screen-mountains {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  width: calc(100% - 16px);
-  height: 45%;
-  opacity: 0.8;
-}
-.laptop-base {
-  position: absolute;
-  bottom: 8px;
-  left: -8%;
-  width: 116%;
-  height: 12px;
-  background: linear-gradient(#97a29a, #34423a 45%, #101a14);
-  border-radius: 0 0 70% 45%;
-  box-shadow: 0 3px 1px #040705;
-}
-.laptop-base span {
-  position: absolute;
-  width: 20%;
-  height: 3px;
-  background: #5a6860;
-  left: 40%;
-  top: 0;
-  border-radius: 0 0 5px 5px;
+.hero-art-brand .logo {
+  width: 110px;
 }
 .art-caption {
   position: absolute;
@@ -1247,70 +1096,27 @@ html[dir="rtl"] .direction-arrow {
   position: relative;
   min-height: 290px;
   overflow: hidden;
-  background: linear-gradient(135deg, #38413966, #111914 40%, #050a07);
+  background: #080d0b;
   border: 1px solid #ffffff0c;
-  border-radius: 4px;
+  border-radius: var(--radius);
   isolation: isolate;
 }
-.brand-wall {
+.brand-visual-image {
+  object-fit: cover;
+}
+.brand-visual-mark {
   position: absolute;
-  left: 18%;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(120deg, #101712, #040805);
-  transform: perspective(800px) rotateY(-20deg) skewY(-5deg);
-  border-left: 1px solid #5c6e5c;
-  box-shadow: -15px 0 50px #0009;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  width: 62%;
+  max-width: 230px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  filter: drop-shadow(0 2px 2px #0006);
 }
-.brand-wall:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #d9f4ce;
-  box-shadow: 0 0 10px 2px #d9f4ce44;
-}
-.brand-wall .logo {
-  transform: scale(1.1);
-  opacity: 0.8;
-  filter: drop-shadow(3px 5px 1px #000);
-}
-.wall-line {
-  position: absolute;
-  bottom: -15%;
-  right: 10%;
-  width: 1px;
-  height: 150%;
-  background: linear-gradient(transparent, #a5b89f, #647960, transparent);
-  transform: rotate(25deg);
-}
-.architectural-lines {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 18%;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 80px, #0a100c 81px 87px),
-    linear-gradient(90deg, #101a14, #697c6d33);
-  border-right: 5px solid #0b100c;
-}
-.brand-visual-caption {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  right: 18px;
-  font-size: 6px;
-  letter-spacing: 1.5px;
-  display: flex;
-  justify-content: space-between;
-  color: #829489;
-  direction: ltr;
+.brand-visual-mark .logo {
+  width: 100%;
 }
 .site-footer {
   padding: 35px 0 32px;
@@ -1838,11 +1644,7 @@ html[dir="rtl"] .direction-arrow {
 html[dir="rtl"] .hero-copy {
   width: 52%;
 }
-html[dir="rtl"] .hero-art {
-  transform: scaleX(-1);
-}
-html[dir="rtl"] .screen-brand,
-html[dir="rtl"] .art-caption {
+html[dir="rtl"] .hero-art-media {
   transform: scaleX(-1);
 }
 html[dir="rtl"] .hero h1 {
@@ -1887,11 +1689,7 @@ html[dir="rtl"] .pillar p {
   .hero-inner {
     min-height: 560px;
   }
-  .laptop {
-    width: 550px;
-    height: 365px;
-    top: 16%;
-  }
+
   .hero-art {
     inset-inline-end: -5%;
   }
@@ -1930,12 +1728,7 @@ html[dir="rtl"] .pillar p {
     width: 63%;
     inset-inline-end: -10%;
   }
-  .laptop {
-    width: 410px;
-    height: 285px;
-    top: 22%;
-    inset-inline-end: 7%;
-  }
+
   .hero-capabilities {
     gap: 10px;
   }
@@ -2066,12 +1859,7 @@ html[dir="rtl"] .pillar p {
     width: 65%;
     inset-inline-end: -13%;
   }
-  .laptop {
-    width: 350px;
-    height: 250px;
-    top: 21%;
-    inset-inline-end: 5%;
-  }
+
   .hero-capabilities {
     max-width: 380px;
     gap: 10px;
@@ -2465,32 +2253,11 @@ html[dir="rtl"] .pillar p {
     inset: auto;
     order: 2;
     width: 118%;
-    height: 285px;
+    height: 260px;
     margin-inline: -9%;
     margin-top: 4px;
   }
-  .laptop {
-    width: 315px;
-    height: 215px;
-    inset-inline-end: 9%;
-    top: 13%;
-    transform: rotate(-8deg) skewX(-8deg);
-  }
-  .hero-art .screen-brand {
-    top: 28%;
-    gap: 15px;
-  }
-  .screen-brand .logo {
-    width: 145px;
-  }
 
-  .screen-tagline {
-    font-size: 5px;
-    gap: 8px;
-  }
-  .screen-tagline b {
-    font-size: 6px;
-  }
   .hero-capabilities {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2511,19 +2278,13 @@ html[dir="rtl"] .pillar p {
     width: 16px;
     height: 16px;
   }
-  .hero-art .brand-beam {
-    top: 38%;
-    height: 30px;
-    left: -15%;
-    width: 140%;
-    transform: rotate(-28deg);
+
+  .hero-art-brand {
+    top: 12px;
+    inset-inline-end: 9%;
   }
-  .terrain-front {
-    height: 27%;
-    mask-image: none;
-  }
-  .terrain-back {
-    height: 75%;
+  .hero-art-brand .logo {
+    width: 90px;
   }
   .art-caption {
     bottom: 14px;

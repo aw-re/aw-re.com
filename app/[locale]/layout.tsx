@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { getLocale } from "@/lib/locale";
 import { tr } from "@/data/site";
+import { companyContact } from "@/data/contact";
 export const metadata: Metadata = {
   metadataBase: new URL("https://aw-re.com"),
   title: {
@@ -53,8 +54,8 @@ export default async function LocaleLayout({
     alternateName: "أوري تك",
     url: "https://aw-re.com",
     logo: "https://aw-re.com/brand/aw-re-tech.png",
-    email: "abdulwahab@aw-re.com",
-    telephone: "+967735898777",
+    email: companyContact.email,
+    telephone: companyContact.phone,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Sana’a",

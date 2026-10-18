@@ -1,77 +1,42 @@
+import Image from "next/image";
+import connectedSystems from "@/public/images/connected-systems.webp";
+import brandCraft from "@/public/images/brand-craft.webp";
 import { Logo } from "./ui";
+
 export function HeroVisual() {
   return (
     <div className="hero-art" aria-hidden="true">
-      <div className="art-grid" />
-      <div className="orbital-line" />
-      <div className="terrain terrain-back" />
-      <div className="terrain terrain-front" />
-      <div className="brand-beam" />
-      <div className="laptop">
-        <div className="laptop-screen">
-          <div className="camera" />
-          <div className="screen-glint" />
-          <div className="screen-brand">
-            <Logo />
-            <div className="screen-tagline">
-              IDEAS <b>→</b> SYSTEMS <b>→</b> REAL IMPACT
-            </div>
-          </div>
-          <svg
-            className="screen-mountains"
-            viewBox="0 0 600 220"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="ridge" x2="0" y2="1">
-                <stop stopColor="#26332e" />
-                <stop offset="1" stopColor="#080d0b" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0 160 70 105 130 144 220 70 285 130 360 80 430 120 510 28 600 0V220H0Z"
-              fill="url(#ridge)"
-            />
-            <path
-              d="m0 160 70-55 60 39 90-74 65 60 75-50 70 40 80-92L600 0"
-              stroke="#526247"
-              strokeWidth="1"
-              fill="none"
-            />
-            <path
-              d="M0 180Q160 220 330 140T600 0"
-              fill="none"
-              stroke="#b6ff3b"
-              strokeWidth="3"
-            />
-          </svg>
-        </div>
-        <div className="laptop-base">
-          <span />
-        </div>
-      </div>
-      <div className="art-caption">
-        <span className="status-dot" />
-        ENGINEERED FOR WHAT’S NEXT <span>AW—RE / 01</span>
+      <div className="hero-art-media">
+        <Image
+          src={connectedSystems}
+          alt=""
+          fill
+          preload
+          sizes="(max-width: 640px) 100vw, 70vw"
+          className="hero-art-image"
+        />
       </div>
     </div>
   );
 }
+
 export function BrandVisual() {
   return (
     <div className="brand-visual" aria-hidden="true">
-      <div className="brand-wall">
+      <Image
+        src={brandCraft}
+        alt=""
+        fill
+        sizes="(max-width: 640px) 89vw, (max-width: 900px) 45vw, 40vw"
+        className="brand-visual-image"
+      />
+      <div className="brand-visual-mark">
         <Logo />
-        <div className="wall-line" />
-      </div>
-      <div className="architectural-lines" />
-      <div className="brand-visual-caption">
-        <span>IDEAS. SYSTEMS. REAL IMPACT.</span>
-        <span>AW—RE TECH</span>
       </div>
     </div>
   );
 }
+
 export function ProjectVisual({
   kind,
   large = false,

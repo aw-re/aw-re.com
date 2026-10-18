@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Locale, t, tr, copy, pillars, process } from "@/data/site";
-import { SectionHeader, Icon, Button, ContactDetails } from "./ui";
-import { BrandVisual } from "./visuals";
+import { SectionHeader, Icon, Button } from "./ui";
 export function WhySection({ locale }: { locale: Locale }) {
   return (
     <section className="section why-section">
@@ -52,36 +51,6 @@ export function ProcessSection({ locale }: { locale: Locale }) {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-export function AboutPreview({ locale }: { locale: Locale }) {
-  return (
-    <section className="section about-preview">
-      <div className="container about-grid">
-        <div>
-          <div className="eyebrow">
-            <span className="section-number">05</span>
-            <i />
-            {tr(locale, "ABOUT AW-RE TECH", "عن أوري تك")}
-          </div>
-          <h2>{t(locale, copy.aboutTitle)}</h2>
-          <p>
-            {t(locale, copy.aboutText)} {t(locale, copy.aboutMore)}
-          </p>
-          <Button secondary href={`/${locale}/about`}>
-            {tr(locale, "More About Us", "المزيد عنا")}
-          </Button>
-        </div>
-        <BrandVisual />
-        <div className="about-contact">
-          <h2>{t(locale, copy.ctaTitle)}</h2>
-          <span className="green-rule" />
-          <p>{t(locale, copy.ctaText)}</p>
-          <Button href={`/${locale}/contact`}>{t(locale, copy.start)}</Button>
-          <ContactDetails locale={locale} />
-        </div>
       </div>
     </section>
   );
