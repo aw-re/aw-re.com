@@ -1480,14 +1480,14 @@ html[dir="rtl"] .direction-arrow {
 }
 .founder-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 65px;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
   align-items: center;
   max-width: 940px;
 }
 .founder-image {
-  width: 280px;
-  height: 350px;
+  width: 180px;
+  height: 225px;
   object-fit: cover;
   object-position: center 24%;
   border-radius: var(--radius);
@@ -2107,12 +2107,12 @@ html[dir="rtl"] .pillar p {
     gap: 35px;
   }
   .founder-grid {
-    grid-template-columns: 230px 1fr;
-    gap: 40px;
+    grid-template-columns: 160px 1fr;
+    gap: 30px;
   }
   .founder-image {
-    width: 230px;
-    height: 300px;
+    width: 160px;
+    height: 200px;
   }
   .founder-grid h2 {
     font-size: 28px;
@@ -2830,14 +2830,14 @@ html[dir="rtl"] .pillar p {
   }
   .founder-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
   .founder-image {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 240px;
-    justify-self: center;
+    max-width: 128px;
+    justify-self: start;
   }
   .founder-grid h2 {
     font-size: 29px;

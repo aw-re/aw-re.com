@@ -58,7 +58,7 @@ export default async function About({
             src="/images/abdulwahab-al-reyashi.jpg"
             width={852}
             height={1280}
-            sizes="(max-width: 640px) 240px, (max-width: 900px) 230px, 280px"
+            sizes="(max-width: 640px) 128px, (max-width: 900px) 160px, 180px"
             alt={tr(
               l,
               "Eng. Abdulwahab Al-Reyashi",
