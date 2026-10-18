@@ -55,9 +55,9 @@ export default async function About({
       <section className="container founder-section">
         <div className="founder-grid">
           <Image
-            src="/images/founder.jpeg"
-            width={560}
-            height={620}
+            src="/images/abdulwahab-al-reyashi.jpg"
+            width={852}
+            height={1280}
             sizes="(max-width: 640px) 89vw, 280px"
             alt={tr(
               l,
@@ -69,13 +69,17 @@ export default async function About({
           <div>
             <div className="eyebrow">
               <i />
-              {tr(l, "THE FOUNDER", "المؤسس")}
+              {tr(l, "BEHIND AW-RE TECH", "وراء أوري تك")}
             </div>
             <h2>
               {tr(l, "Eng. Abdulwahab Al-Reyashi", "المهندس عبدالوهاب الرياشي")}
             </h2>
             <p className="founder-role">
-              {tr(l, "Founder & Managing Director", "المؤسس والمدير العام")}
+              {tr(
+                l,
+                "Software & Digital Solutions Developer",
+                "مطوّر برمجيات وحلول رقمية",
+              )}
             </p>
             <p className="founder-bio">
               {tr(

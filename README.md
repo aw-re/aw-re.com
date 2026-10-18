@@ -45,7 +45,7 @@ Never commit real values. `.env.example` documents the names only. The form retu
 
 The three project summaries and technology labels follow the supplied brief. Dashboard compositions are original HTML/CSS illustrations, explicitly identified as illustrations on the projects and detail pages. They are not customer screenshots. Case-study descriptions and results must be replaced with approved project information; no metrics or testimonials are invented. LinkedIn and YouTube remain noninteractive placeholders until real URLs are provided. GitHub and WhatsApp are linked.
 
-The original founder portrait is retained under `public/images/founder.jpeg`. The wordmark in `public/brand/aw-re-tech.png` is a transparent rendition prepared from the supplied company logo. `Logo` in `components/ui.tsx` is shared by the header, footer, and hero/about illustrations. CSS frames its visible artwork without stretching it or reversing its lettering in RTL. The original raster still contains edge texture; replace it with the original clean SVG export when available for exact vector fidelity.
+The supplied About-page portrait is stored at `public/images/abdulwahab-al-reyashi.jpg`; responsive framing preserves its natural colors and keeps the face visible. The wordmark in `public/brand/aw-re-tech.png` is a transparent rendition prepared from the supplied company logo. `Logo` in `components/ui.tsx` is shared by the header, footer, and hero/about illustrations. CSS frames its visible artwork without stretching it or reversing its lettering in RTL. The original raster still contains edge texture; replace it with the original clean SVG export when available for exact vector fidelity.
 
 ## Deployment
 
