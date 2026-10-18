@@ -37,7 +37,7 @@ export default async function LocaleLayout({
     url: "https://aw-re.com",
     logo: "https://aw-re.com/brand/aw-re-tech.png",
     email: "abdulwahab@aw-re.com",
-    telephone: "+967773936589",
+    telephone: "+967735898777",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Sana’a",

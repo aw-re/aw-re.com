@@ -134,12 +134,12 @@ export function ContactDetails({ locale }: { locale: Locale }) {
         <span>abdulwahab@aw-re.com</span>
       </a>
       <a
-        href="https://wa.me/967773936589"
+        href="https://wa.me/967735898777"
         target="_blank"
         rel="noopener noreferrer"
       >
         <Phone size={17} />
-        <span dir="ltr">+967 773 936 589</span>
+        <span dir="ltr">+967 735 898 777</span>
         <ArrowUpRight size={13} />
       </a>
       <a href="https://aw-re.com">
@@ -165,7 +165,7 @@ export function Socials({ locale }: { locale: Locale }) {
         <Github size={18} />
       </a>
       <a
-        href="https://wa.me/967773936589"
+        href="https://wa.me/967735898777"
         target="_blank"
         rel="noopener noreferrer"
         aria-label={tr(locale, "WhatsApp", "واتساب")}
