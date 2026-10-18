@@ -15,7 +15,24 @@ export const metadata: Metadata = {
     default: "AW-RE Tech | Software, AI & Digital Systems",
     template: "%s | AW-RE Tech",
   },
-  icons: { icon: "/icon.svg" },
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico?v=aw-re-20261018",
+        type: "image/x-icon",
+        sizes: "16x16 32x32 48x48 256x256",
+      },
+      { url: "/icons/aw-re-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icons/aw-re-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icons/aw-re-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico?v=aw-re-20261018",
+    apple: {
+      url: "/icons/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
   robots: { index: true, follow: true },
 };
 export function generateStaticParams() {
