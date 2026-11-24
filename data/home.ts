@@ -1,4 +1,5 @@
 export const homeCopy = {
+  heroTitle: ["Smarter systems", "أنظمة رقمية أذكى"],
   hero: [
     "Thoughtful software, AI and digital systems. Built around your business.",
     "برمجيات وذكاء اصطناعي وأنظمة رقمية، مصمّمة لأعمالك.",

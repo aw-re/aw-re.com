@@ -6,39 +6,40 @@
   width: 49%;
   padding: 76px 0;
 }
-.home-wordmark {
+.home-hero-title {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   min-block-size: clamp(88px, 12vw, 142px);
   container-type: inline-size;
-  font-family: "Manrope Variable", sans-serif;
 }
-.homepage .home-wordmark h1,
-html[dir="rtl"] .homepage .home-wordmark h1 {
-  font-size: min(20cqi, 96px);
-  font-weight: 650;
+.homepage .home-hero-title h1 {
+  font-size: min(13.4cqi, 110px);
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.05em;
   white-space: nowrap;
 }
-html[dir="rtl"] .home-wordmark h1 {
-  text-align: right;
+html[dir="rtl"] .homepage .home-hero-title h1 {
+  font-size: min(15cqi, clamp(50px, 10.2vw, 82px));
+  line-height: 1.2;
+  letter-spacing: normal;
 }
-.home-wordmark-effect {
+.home-hero-title-effect {
   position: absolute;
   inset-block: 0;
   /* The canvas reserves 5% at each end for outlines and particles. */
   inset-inline: -5.555%;
 }
-.home-wordmark:has(.tech-text[data-rendered]) h1 {
+.home-hero-title:has(.tech-text[data-rendered]) h1 {
   color: transparent;
 }
 @media (prefers-reduced-motion: reduce), (forced-colors: active), print {
-  .home-wordmark-effect {
+  .home-hero-title-effect {
     display: none;
   }
-  .home-wordmark:has(.tech-text[data-rendered]) h1 {
+  .home-hero-title:has(.tech-text[data-rendered]) h1 {
     color: inherit;
   }
 }
@@ -413,6 +414,9 @@ html[dir="rtl"] .homepage .hero-copy > p {
   }
 }
 @media (max-width: 640px) {
+  .home-hero-title {
+    min-block-size: clamp(88px, 18vw, 116px);
+  }
   .homepage .hero-inner {
     min-height: 0;
   }

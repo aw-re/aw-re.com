@@ -44,33 +44,35 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const l = await getLocale(params);
-  const wordmark = "AW-RE Tech";
+  const title = t(l, homeCopy.heroTitle);
   return (
     <div className="homepage">
       <section className="hero home-hero">
         <div className="container hero-inner">
           <div className="hero-copy">
-            <div className="home-wordmark">
-              <h1 dir="ltr" lang="en">{wordmark}</h1>
-              <div className="home-wordmark-effect" dir="ltr" aria-hidden="true">
+            <div className="home-hero-title">
+              <h1>{title}</h1>
+              <div className="home-hero-title-effect" aria-hidden="true">
                 <TechText
-                  text={wordmark}
+                  text={title}
+                  direction={l === "ar" ? "rtl" : "ltr"}
                   align={l === "ar" ? "right" : "left"}
-                  fontWeight={650}
-                  fontSize={96}
-                  letterSpacing={-0.055}
+                  fontWeight={600}
+                  fontSize={150}
+                  letterSpacing={l === "ar" ? 0 : -0.05}
                   reveal="letter"
-                  accentColor="#b6ff3b"
+                  accentColor="currentColor"
                   dashLength={4}
                   dashGap={2}
-                  strokeWidth={0.95}
-                  specks={8}
-                  labels={false}
-                  draggable={false}
-                  sweep={false}
+                  strokeWidth={1.5}
+                  specks={15}
+                  labels
+                  draggable
+                  sweep
+                  sweepDuration={4}
                   guides={false}
-                  intro="type"
-                  introDuration={0.95}
+                  intro="none"
+                  introDuration={2}
                   clickKick
                 />
               </div>

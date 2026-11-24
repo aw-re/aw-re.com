@@ -43,6 +43,7 @@ const TechText = ({
   color = 'currentColor',
   accentColor = 'currentColor',
   align = 'center',
+  direction = 'ltr',
   reach = 200,
   softness = 0.7,
   dashLength = 4,
@@ -56,6 +57,7 @@ const TechText = ({
   draggable = true,
   bounce = 0.4,
   sweep = true,
+  sweepDuration = Infinity,
   speed = 1,
   clickKick = true,
   intro = 'none',
@@ -79,6 +81,7 @@ const TechText = ({
       color,
       accentColor,
       align,
+      direction,
       reach,
       softness,
       dashLength,
@@ -92,6 +95,7 @@ const TechText = ({
       draggable,
       bounce,
       sweep,
+      sweepDuration,
       speed,
       clickKick,
       intro,
@@ -124,6 +128,7 @@ const TechText = ({
     let glyphs = [];
     let presence = 0;
     let clock = 0;
+    let sweepElapsed = 0;
     let pulse = 0;
     let placed = false;
     let dragging = -1;
@@ -161,6 +166,7 @@ const TechText = ({
 
     const setFont = (target, s, size) => {
       target.font = fontFor(s, size);
+      target.direction = s.direction;
       if ('letterSpacing' in target) target.letterSpacing = `${s.letterSpacing * size}px`;
       target.textAlign = 'left';
       target.textBaseline = 'alphabetic';
@@ -207,6 +213,7 @@ const TechText = ({
         s.fontSize,
         s.letterSpacing,
         s.align,
+        s.direction,
         ink,
         s.dashLength,
         s.dashGap,
@@ -273,14 +280,17 @@ const TechText = ({
       };
       word = next;
 
-      const chars = Array.from(s.text);
+      const rtl = s.direction === 'rtl';
+      // Keep Arabic joins inside each word while letting the existing effect move it as a unit.
+      const chars = rtl ? s.text.split(/(\s+)/) : Array.from(s.text);
       const previous = glyphs;
       glyphs = [];
       let prefix = '';
       chars.forEach((char, i) => {
         prefix += char;
         const own = probe.measureText(char);
-        const gx = x + probe.measureText(prefix).width - own.width;
+        const prefixWidth = probe.measureText(prefix).width;
+        const gx = rtl ? x + m.width - prefixWidth : x + prefixWidth - own.width;
         if (!char.trim()) return;
         const base = {
           char,
@@ -500,6 +510,7 @@ const TechText = ({
 
       if (!s.labels) return;
       ctx.font = LABEL_FONT;
+      ctx.direction = s.direction;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'bottom';
       ctx.fillStyle = accent;
@@ -711,8 +722,12 @@ const TechText = ({
       const progress = introOn ? clamp01((introClock - INTRO_DELAY) / Math.max(0.3, s.introDuration)) : 1;
       introducing = introOn && progress < 1;
 
-      const sweeping = !introducing && s.sweep && !motionQuery.matches && !pointer.inside && dragging < 0;
-      if (sweeping) clock += dt * s.speed;
+      const sweeping = !introducing && s.sweep && sweepElapsed < s.sweepDuration &&
+        !motionQuery.matches && !pointer.inside && dragging < 0;
+      if (sweeping && fontsReady) {
+        sweepElapsed += dt;
+        clock += dt * s.speed;
+      }
       pulse += dt;
       let targetX = pointer.x;
       let targetY = pointer.y;
@@ -904,7 +919,7 @@ const TechText = ({
       pointer.y = e.clientY - rect.top;
     };
     const onMove = e => {
-      if (e.pointerType === 'touch') return;
+      if (e.pointerType === 'touch' && dragging < 0) return;
       locate(e);
       pointer.inside = true;
       wake();
@@ -935,7 +950,7 @@ const TechText = ({
     const onUp = e => {
       if (dragging >= 0) {
         dragging = -1;
-        container.releasePointerCapture?.(e.pointerId);
+        if (container.hasPointerCapture?.(e.pointerId)) container.releasePointerCapture(e.pointerId);
         const rect = container.getBoundingClientRect();
         pointer.inside =
           e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
