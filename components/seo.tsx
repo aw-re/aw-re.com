@@ -1,5 +1,6 @@
 import { companyContact } from "@/data/contact";
-import { tr, type Locale } from "@/data/site";
+import { companyOwner, ownerProfilePath } from "@/data/company-owner";
+import { t, tr, type Locale } from "@/data/site";
 import { arabicBrandName, brandName, defaultDescription } from "@/lib/metadata";
 import { locales, publicUrl, siteOrigin } from "@/lib/site-urls";
 
@@ -125,6 +126,22 @@ export function PageSchema({
     });
   } else if (type === "AboutPage" || type === "ContactPage") {
     page.mainEntity = { "@id": organizationId };
+  }
+
+  if (type === "AboutPage") {
+    const id = publicUrl("en", ownerProfilePath);
+    page.mentions = { "@id": id };
+    nodes.push({
+      "@type": "Person",
+      "@id": id,
+      url: publicUrl(locale, ownerProfilePath),
+      name: t(locale, companyOwner.name),
+      alternateName: t(locale === "ar" ? "en" : "ar", companyOwner.name),
+      jobTitle: [t(locale, companyOwner.ownershipTitle), t(locale, companyOwner.occupation)],
+      description: t(locale, companyOwner.bio),
+      image: `${siteOrigin}${companyOwner.portrait}`,
+      affiliation: { "@id": organizationId },
+    });
   }
 
   return <JsonLd nodes={nodes} />;

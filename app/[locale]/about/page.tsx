@@ -2,14 +2,15 @@ import Image from "next/image";
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
 import { copy, t, tr } from "@/data/site";
+import { companyOwner } from "@/data/company-owner";
 import { PageHero, Socials } from "@/components/ui";
 import { BrandVisual } from "@/components/visuals";
 import { WhySection, ProcessSection, ContactCTA } from "@/components/sections";
 import { PageSchema } from "@/components/seo";
 
 const aboutDescription = [
-  "Meet AW-RE Tech, a technology company in Sana’a, Yemen, and learn how we plan and develop software, automation and data systems.",
-  "تعرّف على أوري تك، شركة تقنية في صنعاء، اليمن، وعلى طريقتنا في تخطيط مشاريع البرمجيات والأتمتة وأنظمة البيانات وتطويرها.",
+  `Meet ${companyOwner.name[0]}, owner of AW-RE Tech and a software developer focused on digital systems, AI and automation. AW-RE Tech is based in Sana’a, Yemen.`,
+  `تعرّف على ${companyOwner.name[1]}، صاحب شركة أوري تك في صنعاء، اليمن، ومطوّر برمجيات وحلول رقمية يركز على الذكاء الاصطناعي والأتمتة.`,
 ] as const;
 export async function generateMetadata({
   params,
@@ -20,7 +21,7 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/about",
-    tr(l, "About Our Technology Company in Yemen", "عن شركتنا التقنية في اليمن"),
+    tr(l, `${companyOwner.name[0]}, Company Owner`, `${companyOwner.name[1]}، صاحب الشركة`),
     t(l, aboutDescription),
   );
 }
@@ -63,48 +64,34 @@ export default async function About({
         </div>
         <BrandVisual />
       </section>
-      <WhySection locale={l} />
-      <ProcessSection locale={l} />
-      <section className="container founder-section">
+      <section
+        className="container founder-section"
+        id={companyOwner.fragment}
+        aria-labelledby="company-owner-name"
+      >
         <div className="founder-grid">
           <Image
-            src="/images/abdulwahab-al-reyashi.jpg"
+            src={companyOwner.portrait}
             width={852}
             height={1280}
             sizes="(max-width: 640px) 128px, (max-width: 900px) 160px, 180px"
-            alt={tr(
-              l,
-              "Eng. Abdulwahab Al-Reyashi",
-              "المهندس عبدالوهاب الرياشي",
-            )}
+            alt={t(l, companyOwner.name)}
             className="founder-image"
           />
           <div>
-            <div className="eyebrow">
-              <i />
-              {tr(l, "BEHIND AW-RE TECH", "وراء أوري تك")}
-            </div>
-            <h2>
-              {tr(l, "Eng. Abdulwahab Al-Reyashi", "المهندس عبدالوهاب الرياشي")}
-            </h2>
+            <h2 id="company-owner-name">{t(l, companyOwner.name)}</h2>
             <p className="founder-role">
-              {tr(
-                l,
-                "Software & Digital Solutions Developer",
-                "مطوّر برمجيات وحلول رقمية",
-              )}
+              {t(l, companyOwner.ownershipTitle)}
+              {tr(l, " · ", "، ")}
+              {t(l, companyOwner.occupation)}
             </p>
-            <p className="founder-bio">
-              {tr(
-                l,
-                "Information Technology professional focused on software development, artificial intelligence, automation, and digital systems.",
-                "متخصص في تقنية المعلومات، يركز على تطوير البرمجيات والذكاء الاصطناعي والأتمتة والأنظمة الرقمية.",
-              )}
-            </p>
+            <p className="founder-bio">{t(l, companyOwner.bio)}</p>
             <Socials locale={l} />
           </div>
         </div>
       </section>
+      <WhySection locale={l} />
+      <ProcessSection locale={l} />
       <ContactCTA locale={l} />
     </>
   );

@@ -1,4 +1,5 @@
 import { serviceDetails } from "@/data/service-details";
+import { companyOwner, ownerProfilePath } from "@/data/company-owner";
 import { projects, services, t, tr, type Locale } from "@/data/site";
 import { defaultDescription } from "@/lib/metadata";
 import { projectPath, publicUrl, servicePath } from "@/lib/site-urls";
@@ -10,6 +11,7 @@ function linksFor(locale: Locale) {
     `## ${tr(locale, "English resources", "مصادر باللغة العربية")}`,
     "",
     `- [${tr(locale, "About AW-RE Tech", "عن أوري تك")}](${publicUrl(locale, "/about")})`,
+    `- [${t(locale, companyOwner.name)}](${publicUrl(locale, ownerProfilePath)}): ${t(locale, companyOwner.ownershipTitle)}. ${t(locale, companyOwner.bio)}`,
     ...services.map(({ slug }) => {
       const detail = serviceDetails[slug];
       return `- [${t(locale, detail.title)}](${publicUrl(locale, servicePath(slug))}): ${t(locale, detail.description)}`;
