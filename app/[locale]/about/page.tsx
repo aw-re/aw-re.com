@@ -2,15 +2,15 @@ import Image from "next/image";
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
 import { copy, t, tr } from "@/data/site";
-import { companyOwner } from "@/data/company-owner";
+import { developerProfile } from "@/data/developer-profile";
 import { PageHero, Socials } from "@/components/ui";
 import { BrandVisual } from "@/components/visuals";
 import { WhySection, ProcessSection, ContactCTA } from "@/components/sections";
 import { PageSchema } from "@/components/seo";
 
 const aboutDescription = [
-  `Meet ${companyOwner.name[0]}, owner of AW-RE Tech and a software developer focused on digital systems, AI and automation. AW-RE Tech is based in Sana’a, Yemen.`,
-  `تعرّف على ${companyOwner.name[1]}، صاحب شركة أوري تك في صنعاء، اليمن، ومطوّر برمجيات وحلول رقمية يركز على الذكاء الاصطناعي والأتمتة.`,
+  `Meet ${developerProfile.name[0]}, a software and digital solutions developer at AW-RE Tech focused on AI, automation and digital systems.`,
+  `تعرّف على ${developerProfile.name[1]}، مطوّر برمجيات وحلول رقمية في أوري تك، يركز على الذكاء الاصطناعي والأتمتة والأنظمة الرقمية.`,
 ] as const;
 export async function generateMetadata({
   params,
@@ -21,7 +21,7 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/about",
-    tr(l, `${companyOwner.name[0]}, Company Owner`, `${companyOwner.name[1]}، صاحب الشركة`),
+    tr(l, `${developerProfile.name[0]}, Software Developer`, `${developerProfile.name[1]}، مطوّر برمجيات`),
     t(l, aboutDescription),
   );
 }
@@ -65,27 +65,23 @@ export default async function About({
         <BrandVisual />
       </section>
       <section
-        className="container founder-section"
-        id={companyOwner.fragment}
-        aria-labelledby="company-owner-name"
+        className="container about-profile-section"
+        id={developerProfile.fragment}
+        aria-labelledby="about-profile-name"
       >
-        <div className="founder-grid">
+        <div className="about-profile-grid">
           <Image
-            src={companyOwner.portrait}
+            src={developerProfile.portrait}
             width={852}
             height={1280}
             sizes="(max-width: 640px) 128px, (max-width: 900px) 160px, 180px"
-            alt={t(l, companyOwner.name)}
-            className="founder-image"
+            alt={t(l, developerProfile.name)}
+            className="about-profile-image"
           />
           <div>
-            <h2 id="company-owner-name">{t(l, companyOwner.name)}</h2>
-            <p className="founder-role">
-              {t(l, companyOwner.ownershipTitle)}
-              {tr(l, " · ", "، ")}
-              {t(l, companyOwner.occupation)}
-            </p>
-            <p className="founder-bio">{t(l, companyOwner.bio)}</p>
+            <h2 id="about-profile-name">{t(l, developerProfile.name)}</h2>
+            <p className="about-profile-role">{t(l, developerProfile.role)}</p>
+            <p className="about-profile-bio">{t(l, developerProfile.bio)}</p>
             <Socials locale={l} />
           </div>
         </div>

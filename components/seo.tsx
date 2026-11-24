@@ -1,5 +1,5 @@
 import { companyContact } from "@/data/contact";
-import { companyOwner, ownerProfilePath } from "@/data/company-owner";
+import { developerProfile, developerProfilePath } from "@/data/developer-profile";
 import { t, tr, type Locale } from "@/data/site";
 import { arabicBrandName, brandName, defaultDescription } from "@/lib/metadata";
 import { locales, publicUrl, siteOrigin } from "@/lib/site-urls";
@@ -129,17 +129,17 @@ export function PageSchema({
   }
 
   if (type === "AboutPage") {
-    const id = publicUrl("en", ownerProfilePath);
+    const id = publicUrl("en", developerProfilePath);
     page.mentions = { "@id": id };
     nodes.push({
       "@type": "Person",
       "@id": id,
-      url: publicUrl(locale, ownerProfilePath),
-      name: t(locale, companyOwner.name),
-      alternateName: t(locale === "ar" ? "en" : "ar", companyOwner.name),
-      jobTitle: [t(locale, companyOwner.ownershipTitle), t(locale, companyOwner.occupation)],
-      description: t(locale, companyOwner.bio),
-      image: `${siteOrigin}${companyOwner.portrait}`,
+      url: publicUrl(locale, developerProfilePath),
+      name: t(locale, developerProfile.name),
+      alternateName: t(locale === "ar" ? "en" : "ar", developerProfile.name),
+      jobTitle: t(locale, developerProfile.occupation),
+      description: t(locale, developerProfile.bio),
+      image: `${siteOrigin}${developerProfile.portrait}`,
       affiliation: { "@id": organizationId },
     });
   }

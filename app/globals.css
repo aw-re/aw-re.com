@@ -1541,17 +1541,17 @@ html[dir="rtl"] .direction-arrow {
 .about-story .brand-visual {
   min-height: 350px;
 }
-.founder-section {
+.about-profile-section {
   padding-block: 65px;
 }
-.founder-grid {
+.about-profile-grid {
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 40px;
   align-items: center;
   max-width: 940px;
 }
-.founder-image {
+.about-profile-image {
   width: 180px;
   height: 225px;
   object-fit: cover;
@@ -1559,16 +1559,16 @@ html[dir="rtl"] .direction-arrow {
   border-radius: var(--radius);
   border: 1px solid #ffffff12;
 }
-.founder-grid h2 {
+.about-profile-grid h2 {
   font-size: 34px;
   margin-top: 20px;
 }
-.founder-role {
+.about-profile-role {
   color: var(--accent);
   margin-top: 10px;
   font-size: 13px;
 }
-.founder-bio {
+.about-profile-bio {
   margin: 24px 0;
   max-width: 520px;
 }
@@ -2172,15 +2172,15 @@ html[dir="rtl"] .pillar p {
   .about-story {
     gap: 35px;
   }
-  .founder-grid {
+  .about-profile-grid {
     grid-template-columns: 160px 1fr;
     gap: 30px;
   }
-  .founder-image {
+  .about-profile-image {
     width: 160px;
     height: 200px;
   }
-  .founder-grid h2 {
+  .about-profile-grid h2 {
     font-size: 28px;
   }
   .contact-page {
@@ -2891,25 +2891,25 @@ html[dir="rtl"] .pillar p {
   .about-story .brand-visual {
     min-height: 280px;
   }
-  .founder-section {
+  .about-profile-section {
     padding-block: 40px;
   }
-  .founder-grid {
+  .about-profile-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .founder-image {
+  .about-profile-image {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
     max-width: 128px;
     justify-self: start;
   }
-  .founder-grid h2 {
+  .about-profile-grid h2 {
     font-size: 29px;
     margin-top: 13px;
   }
-  .founder-bio {
+  .about-profile-bio {
     font-size: 14px;
     margin: 20px 0;
   }
