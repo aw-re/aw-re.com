@@ -11,6 +11,7 @@ const SPRING = 320;
 const INHERIT = /^(currentcolor|inherit)$/i;
 const INTRO_DELAY = 0.15;
 const KICK_DECAY = 0.62;
+const SWEEP_CYCLE = 4.2;
 
 const approach = (current, target, dt, seconds) => current + (target - current) * (1 - Math.exp(-dt / seconds));
 
@@ -57,7 +58,6 @@ const TechText = ({
   draggable = true,
   bounce = 0.4,
   sweep = true,
-  sweepDuration = Infinity,
   speed = 1,
   clickKick = true,
   intro = 'none',
@@ -95,7 +95,6 @@ const TechText = ({
       draggable,
       bounce,
       sweep,
-      sweepDuration,
       speed,
       clickKick,
       intro,
@@ -127,8 +126,7 @@ const TechText = ({
     let word = null;
     let glyphs = [];
     let presence = 0;
-    let clock = 0;
-    let sweepElapsed = 0;
+    let sweepTime = 0;
     let pulse = 0;
     let placed = false;
     let dragging = -1;
@@ -722,18 +720,24 @@ const TechText = ({
       const progress = introOn ? clamp01((introClock - INTRO_DELAY) / Math.max(0.3, s.introDuration)) : 1;
       introducing = introOn && progress < 1;
 
-      const sweeping = !introducing && s.sweep && sweepElapsed < s.sweepDuration &&
+      const sweeping = !introducing && s.sweep && fontsReady && glyphs.length > 0 &&
         !motionQuery.matches && !pointer.inside && dragging < 0;
-      if (sweeping && fontsReady) {
-        sweepElapsed += dt;
-        clock += dt * s.speed;
-      }
       pulse += dt;
       let targetX = pointer.x;
       let targetY = pointer.y;
+      let sweepIndex = -1;
       if (sweeping) {
-        targetX = view.left + (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
-        targetY = view.top + (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
+        sweepTime += dt * s.speed;
+        if (sweepTime >= SWEEP_CYCLE) {
+          sweepTime %= SWEEP_CYCLE;
+          placed = false;
+          frame.index = -1;
+        }
+        // Glyphs are stored in reading order, including whole words for RTL.
+        sweepIndex = Math.floor((sweepTime / SWEEP_CYCLE) * glyphs.length);
+        const { box } = glyphs[sweepIndex];
+        targetX = (box.x1 + box.x2) / 2;
+        targetY = (box.y1 + box.y2) / 2;
       }
       const active = !introducing && (pointer.inside || sweeping || dragging >= 0);
       if (active && !placed) {
@@ -794,7 +798,11 @@ const TechText = ({
         });
       }
 
-      const focus = introducing ? typing : dragging >= 0 ? dragging : active ? glyphAt(lens.x, lens.y) : -1;
+      let focus = -1;
+      if (introducing) focus = typing;
+      else if (dragging >= 0) focus = dragging;
+      else if (sweeping) focus = sweepIndex;
+      else if (active) focus = glyphAt(lens.x, lens.y);
       if (focus >= 0 && s.selection) {
         const glyph = glyphs[focus];
         const bx1 = glyph.box.x1 + glyph.offset.x - 6;

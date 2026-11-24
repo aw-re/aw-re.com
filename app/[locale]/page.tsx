@@ -4,7 +4,7 @@ import { copy, t, tr } from "@/data/site";
 import { homeCopy } from "@/data/home";
 import { Button } from "@/components/ui";
 import { HeroVisual } from "@/components/visuals";
-import TechText from "@/components/react-bits/TechText";
+import HomeHeroTitle from "@/components/home-hero-title";
 import {
   HomeServices,
   HomeProjects,
@@ -44,39 +44,12 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const l = await getLocale(params);
-  const title = t(l, homeCopy.heroTitle);
   return (
     <div className="homepage">
       <section className="hero home-hero">
         <div className="container hero-inner">
           <div className="hero-copy">
-            <div className="home-hero-title">
-              <h1>{title}</h1>
-              <div className="home-hero-title-effect" aria-hidden="true">
-                <TechText
-                  text={title}
-                  direction={l === "ar" ? "rtl" : "ltr"}
-                  align={l === "ar" ? "right" : "left"}
-                  fontWeight={600}
-                  fontSize={150}
-                  letterSpacing={l === "ar" ? 0 : -0.05}
-                  reveal="letter"
-                  accentColor="currentColor"
-                  dashLength={4}
-                  dashGap={2}
-                  strokeWidth={1.5}
-                  specks={15}
-                  labels
-                  draggable
-                  sweep
-                  sweepDuration={4}
-                  guides={false}
-                  intro="none"
-                  introDuration={2}
-                  clickKick
-                />
-              </div>
-            </div>
+            <HomeHeroTitle title={t(l, homeCopy.heroTitle)} locale={l} />
             <p>{t(l, homeCopy.hero)}</p>
             <div className="hero-buttons">
               <Button href={`/${l}/contact`}>{t(l, copy.start)}</Button>

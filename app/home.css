@@ -35,6 +35,28 @@ html[dir="rtl"] .homepage .home-hero-title h1 {
 .home-hero-title:has(.tech-text[data-rendered]) h1 {
   color: transparent;
 }
+.home-hero-motion {
+  display: none;
+  position: absolute;
+  inset-block-start: -9px;
+  inset-inline-end: 0;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid #ffffff36;
+  border-radius: 50%;
+  background: #0b0f0e;
+  color: #b6c0b9;
+}
+@media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .home-hero-title:has(.tech-text[data-rendered]) .home-hero-motion {
+    display: grid;
+  }
+}
+.home-hero-motion:hover {
+  color: var(--text);
+  border-color: #ffffff63;
+}
 @media (prefers-reduced-motion: reduce), (forced-colors: active), print {
   .home-hero-title-effect {
     display: none;
