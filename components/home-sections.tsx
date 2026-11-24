@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Locale, services, projects, t, tr, copy } from "@/data/site";
 import { companyContact } from "@/data/contact";
 import { homeCopy, homeServiceSummaries } from "@/data/home";
+import { servicePath } from "@/lib/site-urls";
 import { Button } from "./ui";
 import { BrandVisual, ProjectVisual } from "./visuals";
 
@@ -50,7 +51,7 @@ export function HomeServices({ locale }: { locale: Locale }) {
         <div className="home-services-grid">
           {services.map((service, index) => (
             <Link
-              href={`/${locale}/services#${service.slug}`}
+              href={`/${locale}${servicePath(service.slug)}`}
               className="home-service"
               key={service.slug}
             >

@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { projects, t, tr } from "@/data/site";
+import { projects, services, t, tr } from "@/data/site";
+import { serviceDetails } from "@/data/service-details";
+import { PageSchema } from "@/components/seo";
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
+import { projectPath, servicePath } from "@/lib/site-urls";
 import { PageHero, Button } from "@/components/ui";
 import { ProjectVisual } from "@/components/visuals";
 export function generateStaticParams() {
@@ -20,7 +23,7 @@ export async function generateMetadata({
   if (!p) notFound();
   return pageMetadata(
     l,
-    `/projects/${slug}`,
+    projectPath(p.slug),
     t(l, p.name),
     t(l, p.description),
   );
@@ -34,8 +37,16 @@ export default async function Project({
   const { slug } = await params;
   const p = projects.find((p) => p.slug === slug);
   if (!p) notFound();
+  const relatedServices = services.filter((s) => serviceDetails[s.slug].relatedProjects.includes(p.slug));
   return (
     <>
+      <PageSchema
+        locale={l}
+        path={projectPath(p.slug)}
+        name={t(l, p.name)}
+        description={t(l, p.description)}
+        parents={[{ name: tr(l, "Projects", "المشاريع"), path: "/projects" }]}
+      />
       <div className="project-detail-hero">
         <PageHero
           eyebrow={t(l, p.category)}
@@ -67,6 +78,18 @@ export default async function Project({
               <li key={tag}>{tag}</li>
             ))}
           </ul>
+          {relatedServices.length > 0 && (
+            <>
+              <h3>{tr(l, "Related services", "خدمات ذات صلة")}</h3>
+              <ul className="service-guide-links">
+                {relatedServices.map((s) => (
+                  <li key={s.slug}>
+                    <Link href={`/${l}${servicePath(s.slug)}`}>{t(l, s.name)}</Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           <Link className="back-link" href={`/${l}/projects`}>
             <ArrowLeft size={16} className="direction-arrow" />
             {tr(l, "All Projects", "جميع المشاريع")}

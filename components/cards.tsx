@@ -13,7 +13,7 @@ export function ServiceCard({
   locale: Locale;
 }) {
   return (
-    <Link className="service-card" href={`/${locale}/services#${service.slug}`}>
+    <Link className="service-card" href={`/${locale}/services/${service.slug}`}>
       <div className="icon-box">
         <Icon name={service.icon} />
       </div>

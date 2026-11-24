@@ -1273,6 +1273,72 @@ html[dir="rtl"] .direction-arrow {
 .service-detail-main .button {
   margin-top: 6px;
 }
+.service-detail-heading h2 a {
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+.service-detail-heading h2 a:hover {
+  text-decoration-color: var(--accent);
+}
+.service-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.46fr);
+  align-items: start;
+  gap: clamp(28px, 5vw, 72px);
+  padding-bottom: 70px;
+}
+.service-guide-section + .service-guide-section {
+  margin-top: 38px;
+}
+.service-guide-section h2 {
+  font-size: clamp(23px, 3vw, 32px);
+  margin-bottom: 14px;
+}
+.service-guide-section h3 {
+  font-size: 17px;
+  margin-block: 22px 7px;
+}
+.service-guide-section p {
+  font-size: 15px;
+  line-height: 1.85;
+}
+.service-guide-list {
+  list-style: disc;
+  padding-inline-start: 1.25em;
+  margin-top: 14px;
+  line-height: 1.9;
+}
+.service-guide-list li::marker {
+  color: var(--accent);
+}
+.service-guide-aside h2 {
+  font-size: 22px;
+}
+.service-guide-aside h3 {
+  margin-top: 25px;
+}
+.service-guide-links {
+  margin-top: 8px;
+}
+.service-guide-links li + li {
+  margin-top: 8px;
+}
+.service-guide-links a,
+.service-guide-back {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.service-guide-back {
+  display: block;
+  margin-top: 22px;
+}
+@media (max-width: 740px) {
+  .service-guide {
+    grid-template-columns: 1fr;
+    padding-bottom: 46px;
+  }
+}
 .cta-section {
   background: linear-gradient(125deg, #131e14, #0b100d);
   overflow: hidden;

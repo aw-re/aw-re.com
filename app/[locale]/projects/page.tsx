@@ -1,10 +1,17 @@
 import { Info } from "lucide-react";
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
-import { projects, copy, t, tr } from "@/data/site";
+import { projects, t, tr } from "@/data/site";
 import { PageHero } from "@/components/ui";
 import { ProjectCard } from "@/components/cards";
 import { ContactCTA } from "@/components/sections";
+import { PageSchema } from "@/components/seo";
+import { projectPath } from "@/lib/site-urls";
+
+const projectsDescription = [
+  "Explore AW-RE Tech projects in business reporting, field sales management and pharmaceutical market intelligence.",
+  "تصفّح مشاريع أوري تك في تقارير الأعمال، وإدارة فرق المبيعات الميدانية، وأنظمة معلومات السوق الدوائي.",
+] as const;
 export async function generateMetadata({
   params,
 }: {
@@ -14,8 +21,8 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/projects",
-    tr(l, "Projects", "المشاريع"),
-    t(l, copy.projectsIntro),
+    tr(l, "Business Software & Data Projects", "مشاريع برمجيات الأعمال وأنظمة البيانات"),
+    t(l, projectsDescription),
   );
 }
 export default async function Projects({
@@ -26,14 +33,22 @@ export default async function Projects({
   const l = await getLocale(params);
   return (
     <>
+      <PageSchema
+        locale={l}
+        path="/projects"
+        name={tr(l, "Projects", "المشاريع")}
+        description={t(l, projectsDescription)}
+        type="CollectionPage"
+        entries={projects.map((p) => ({ name: t(l, p.name), path: projectPath(p.slug) }))}
+      />
       <PageHero
         eyebrow={tr(l, "SELECTED WORK", "أعمال مختارة")}
         title={tr(
           l,
-          "Work that solves real problems.",
-          "أعمال تعالج تحديات حقيقية.",
+          "Business software and data projects",
+          "مشاريع برمجيات الأعمال وأنظمة البيانات",
         )}
-        description={t(l, copy.projectsIntro)}
+        description={t(l, projectsDescription)}
       />
       <section className="container projects-page-grid">
         <div className="projects-grid">

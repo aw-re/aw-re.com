@@ -50,11 +50,11 @@ export async function GET() {
           lineHeight: 1.1,
         }}
       >
-        <span>A Smarter</span>
-        <span style={{ color: "#b6ff3b" }}>Tomorrow.</span>
+        <span>Smarter</span>
+        <span style={{ color: "#b6ff3b" }}>systems.</span>
       </div>
       <p style={{ fontSize: 25, color: "#a9b2ae" }}>
-        Software, AI & Digital Systems built for real business impact.
+        Software development, AI automation &amp; data systems
       </p>
     </div>,
     size,

@@ -9,9 +9,10 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { getLocale } from "@/lib/locale";
 import { tr } from "@/data/site";
-import { companyContact } from "@/data/contact";
+import { SiteSchema } from "@/components/seo";
+import { locales, siteOrigin } from "@/lib/site-urls";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aw-re.com"),
+  metadataBase: new URL(siteOrigin),
   title: {
     default: "AW-RE Tech | Software, AI & Digital Systems",
     template: "%s | AW-RE Tech",
@@ -34,10 +35,10 @@ export const metadata: Metadata = {
       type: "image/png",
     },
   },
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, "max-image-preview": "large" },
 };
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }];
+  return locales.map((locale) => ({ locale }));
 }
 export default async function LocaleLayout({
   children,
@@ -47,22 +48,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const locale = await getLocale(params);
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "AW-RE Tech",
-    alternateName: "أوري تك",
-    url: "https://aw-re.com",
-    logo: "https://aw-re.com/brand/aw-re-tech.png",
-    email: companyContact.email,
-    telephone: companyContact.phone,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Sana’a",
-      addressCountry: "YE",
-    },
-    sameAs: ["https://github.com/aw-re"],
-  };
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
@@ -72,10 +57,7 @@ export default async function LocaleLayout({
         <Header locale={locale} />
         <main id="main">{children}</main>
         <Footer locale={locale} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+        <SiteSchema locale={locale} />
       </body>
     </html>
   );

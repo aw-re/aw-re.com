@@ -1,8 +1,8 @@
 export const homeCopy = {
   heroTitle: ["Smarter systems", "أنظمة رقمية أذكى"],
   hero: [
-    "Thoughtful software, AI and digital systems. Built around your business.",
-    "برمجيات وذكاء اصطناعي وأنظمة رقمية، مصمّمة لأعمالك.",
+    "AW-RE Tech builds custom software, AI automation and data systems for businesses from Sana’a, Yemen.",
+    "أوري تك شركة تقنية من صنعاء، اليمن. نطوّر البرمجيات المخصصة وأتمتة الأعمال بالذكاء الاصطناعي وأنظمة البيانات.",
   ],
   servicesTitle: [
     "The right expertise. A clear direction.",

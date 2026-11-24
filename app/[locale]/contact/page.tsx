@@ -1,8 +1,14 @@
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
 import { copy, t, tr, services } from "@/data/site";
+import { PageSchema } from "@/components/seo";
 import { PageHero, ContactDetails } from "@/components/ui";
 import ContactForm from "@/components/contact-form";
+
+const contactDescription = [
+  "Contact AW-RE Tech in Sana’a, Yemen, by email or WhatsApp to discuss software development, AI automation, dashboards or IT consulting.",
+  "تواصل مع أوري تك في صنعاء، اليمن، عبر البريد أو واتساب لمناقشة تطوير البرمجيات أو الأتمتة أو لوحات البيانات أو الاستشارات التقنية.",
+] as const;
 export async function generateMetadata({
   params,
 }: {
@@ -12,8 +18,8 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/contact",
-    tr(l, "Contact", "تواصل معنا"),
-    t(l, copy.ctaText),
+    tr(l, "Contact Us for a Project", "تواصل معنا لبدء مشروع"),
+    t(l, contactDescription),
   );
 }
 export default async function Contact({
@@ -28,9 +34,16 @@ export default async function Contact({
   const selected = services.some((s) => s.slug === service) ? service : "";
   return (
     <>
+      <PageSchema
+        locale={l}
+        path="/contact"
+        name={tr(l, "Contact AW-RE Tech", "تواصل مع أوري تك")}
+        description={t(l, contactDescription)}
+        type="ContactPage"
+      />
       <PageHero
         eyebrow={tr(l, "LET’S TALK", "لنتحدث")}
-        title={t(l, copy.ctaTitle)}
+        title={tr(l, "Contact AW-RE Tech", "تواصل مع أوري تك")}
         description={t(l, copy.ctaText)}
       />
       <section className="container contact-page">

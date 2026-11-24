@@ -1,7 +1,16 @@
+import Link from "next/link";
 import { getLocale } from "@/lib/locale";
 import { pageMetadata } from "@/lib/metadata";
 import { services, t, tr } from "@/data/site";
 import { PageHero, Icon, Button } from "@/components/ui";
+import { PageSchema } from "@/components/seo";
+import { servicePath } from "@/lib/site-urls";
+
+const title = ["Software, AI Automation, Data & IT Services", "خدمات البرمجيات والذكاء الاصطناعي والبيانات وتقنية المعلومات"] as const;
+const description = [
+  "Explore custom software development, AI integration and business automation, dashboards and data systems, and IT consulting from AW-RE Tech.",
+  "تعرّف على خدمات أوري تك في تطوير البرمجيات المخصصة، وتكامل الذكاء الاصطناعي وأتمتة الأعمال، ولوحات البيانات، والاستشارات التقنية.",
+] as const;
 export async function generateMetadata({
   params,
 }: {
@@ -11,12 +20,8 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/services",
-    tr(l, "Services", "خدماتنا"),
-    tr(
-      l,
-      "Software, AI automation, data systems and IT solutions built around your business.",
-      "تطوير برمجيات وأتمتة وذكاء اصطناعي وأنظمة بيانات وحلول تقنية تلائم أعمالك.",
-    ),
+    t(l, title),
+    t(l, description),
   );
 }
 export default async function Services({
@@ -27,12 +32,20 @@ export default async function Services({
   const l = await getLocale(params);
   return (
     <>
+      <PageSchema
+        locale={l}
+        path="/services"
+        name={tr(l, "Services", "خدماتنا")}
+        description={t(l, description)}
+        type="CollectionPage"
+        entries={services.map((s) => ({ name: t(l, s.name), path: servicePath(s.slug) }))}
+      />
       <PageHero
         eyebrow={tr(l, "WHAT WE DO", "ماذا نقدم")}
         title={tr(
           l,
-          "Digital solutions built around real business needs.",
-          "حلول رقمية تنطلق من احتياجات أعمالك.",
+          "Software, AI, data & IT services",
+          "خدمات البرمجيات والذكاء الاصطناعي والبيانات",
         )}
         description={tr(
           l,
@@ -50,7 +63,9 @@ export default async function Services({
               <div className="eyebrow">
                 0{i + 1} — {tr(l, "OUR EXPERTISE", "مجالات خبرتنا")}
               </div>
-              <h2>{t(l, s.name)}</h2>
+              <h2>
+                <Link href={`/${l}${servicePath(s.slug)}`}>{t(l, s.name)}</Link>
+              </h2>
             </div>
             <div className="service-detail-main">
               <p>{t(l, s.description)}</p>

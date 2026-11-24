@@ -5,6 +5,12 @@ import { copy, t, tr } from "@/data/site";
 import { PageHero, Socials } from "@/components/ui";
 import { BrandVisual } from "@/components/visuals";
 import { WhySection, ProcessSection, ContactCTA } from "@/components/sections";
+import { PageSchema } from "@/components/seo";
+
+const aboutDescription = [
+  "Meet AW-RE Tech, a technology company in Sana’a, Yemen, and learn how we plan and develop software, automation and data systems.",
+  "تعرّف على أوري تك، شركة تقنية في صنعاء، اليمن، وعلى طريقتنا في تخطيط مشاريع البرمجيات والأتمتة وأنظمة البيانات وتطويرها.",
+] as const;
 export async function generateMetadata({
   params,
 }: {
@@ -14,8 +20,8 @@ export async function generateMetadata({
   return pageMetadata(
     l,
     "/about",
-    tr(l, "About", "من نحن"),
-    t(l, copy.aboutText),
+    tr(l, "About Our Technology Company in Yemen", "عن شركتنا التقنية في اليمن"),
+    t(l, aboutDescription),
   );
 }
 export default async function About({
@@ -26,13 +32,20 @@ export default async function About({
   const l = await getLocale(params);
   return (
     <>
+      <PageSchema
+        locale={l}
+        path="/about"
+        name={tr(l, "About AW-RE Tech", "عن أوري تك")}
+        description={t(l, aboutDescription)}
+        type="AboutPage"
+      />
       <PageHero
         eyebrow={tr(l, "ABOUT AW-RE TECH", "عن أوري تك")}
-        title={t(l, copy.aboutTitle)}
+        title={tr(l, "About AW-RE Tech", "عن أوري تك")}
         description={tr(
           l,
-          "Practical thinking. Thoughtful engineering. Digital systems that make a difference.",
-          "تفكير عملي، وهندسة مدروسة، وأنظمة رقمية تصنع فرقًا.",
+          "A technology company in Sana’a, Yemen, building software and digital systems for businesses.",
+          "شركة تقنية في صنعاء، اليمن، تطوّر البرمجيات والأنظمة الرقمية للشركات والمؤسسات.",
         )}
       />
       <section className="container about-story">

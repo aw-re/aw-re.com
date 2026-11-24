@@ -8,6 +8,10 @@ declare global {
 const pages = [
   "",
   "/services",
+  "/services/software",
+  "/services/ai",
+  "/services/data",
+  "/services/it",
   "/projects",
   "/about",
   "/contact",
@@ -180,5 +184,52 @@ test("metadata, canonical URLs, sitemap and social image", async ({
     "https://aw-re.com/ar/projects/business-reporting-platform",
   );
   expect((await request.get("/en/projects/missing")).status()).toBe(404);
+  expect((await request.get("/ar/services/inexistent")).status()).toBe(404);
   expect((await request.get("/zz")).status()).toBe(404);
+});
+
+test("service discovery exposes matching crawlable URLs and structured data", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/ar");
+  await expect(page.locator('main a[href="/ar/services/ai"]')).toBeVisible();
+  await page.locator('main a[href="/ar/services/ai"]').click();
+  await expect(page).toHaveURL("/ar/services/ai");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "تكامل الذكاء الاصطناعي وأتمتة الأعمال",
+  );
+  const canonical = "https://aw-re.com/ar/services/ai";
+  const english = "https://aw-re.com/en/services/ai";
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", canonical);
+  for (const [locale, href] of [["ar", canonical], ["en", english], ["x-default", english]]) {
+    await expect(page.locator(`link[rel="alternate"][hreflang="${locale}"]`)).toHaveAttribute("href", href);
+  }
+  const entities = await page.locator('script[type="application/ld+json"]').evaluateAll(
+    (scripts) => scripts.flatMap((script) => JSON.parse(script.textContent ?? "")["@graph"]),
+  );
+  expect(entities).toEqual(expect.arrayContaining([
+    expect.objectContaining({ "@type": "Organization", "@id": "https://aw-re.com/#organization" }),
+    expect.objectContaining({
+      "@type": "Service",
+      url: canonical,
+      name: "تكامل الذكاء الاصطناعي وأتمتة الأعمال",
+      provider: { "@id": "https://aw-re.com/#organization" },
+    }),
+    expect.objectContaining({
+      "@type": "BreadcrumbList",
+      itemListElement: expect.arrayContaining([expect.objectContaining({ position: 3, item: canonical })]),
+    }),
+  ]));
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (match) => match[1]).sort()).toEqual(
+    ["ar", "en"].flatMap((locale) => pages.map((path) => `https://aw-re.com/${locale}${path}`)).sort(),
+  );
+  expect(sitemap).toContain('hreflang="x-default" href="https://aw-re.com/en/services/ai"');
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toContain("User-Agent: OAI-SearchBot");
+  expect(robots).toContain("Sitemap: https://aw-re.com/sitemap.xml");
+  const llms = await request.get("/llms.txt");
+  expect(llms.headers()["content-type"]).toContain("text/plain");
+  expect(await llms.text()).toContain(`(${canonical})`);
 });

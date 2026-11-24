@@ -1,42 +1,29 @@
 import { getLocale } from "@/lib/locale";
 import { defaultDescription, pageMetadata } from "@/lib/metadata";
-import { copy, t, tr } from "@/data/site";
+import { copy, t } from "@/data/site";
 import { homeCopy } from "@/data/home";
 import { Button } from "@/components/ui";
 import { HeroVisual } from "@/components/visuals";
 import HomeHeroTitle from "@/components/home-hero-title";
+import { PageSchema } from "@/components/seo";
 import {
   HomeServices,
   HomeProjects,
   HomeClosing,
 } from "@/components/home-sections";
 import "../home.css";
+const homeTitle = [
+  "AW-RE Tech | Software Development & AI Automation in Yemen",
+  "أوري تك | تطوير البرمجيات وأتمتة الأعمال في اليمن",
+] as const;
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const l = await getLocale(params);
-  const metadata = pageMetadata(
-    l,
-    "",
-    tr(
-      l,
-      "AW-RE Tech | Software, AI & Digital Systems",
-      "أوري تك | البرمجيات والذكاء الاصطناعي والأنظمة الرقمية",
-    ),
-    defaultDescription(l),
-  );
-  return {
-    ...metadata,
-    title: {
-      absolute: tr(
-        l,
-        "AW-RE Tech | Software, AI & Digital Systems",
-        "أوري تك | البرمجيات والذكاء الاصطناعي والأنظمة الرقمية",
-      ),
-    },
-  };
+  return pageMetadata(l, "", t(l, homeTitle), defaultDescription(l));
 }
 export default async function Home({
   params,
@@ -46,6 +33,7 @@ export default async function Home({
   const l = await getLocale(params);
   return (
     <div className="homepage">
+      <PageSchema locale={l} path="" name={t(l, homeTitle)} description={defaultDescription(l)} />
       <section className="hero home-hero">
         <div className="container hero-inner">
           <div className="hero-copy">

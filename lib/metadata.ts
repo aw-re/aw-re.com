@@ -1,45 +1,49 @@
 import type { Metadata } from "next";
 import { Locale, tr } from "@/data/site";
+import { languageAlternates, publicUrl, siteOrigin } from "@/lib/site-urls";
+
+export const brandName = "AW-RE Tech";
+export const arabicBrandName = "أوري تك";
+
 export function pageMetadata(
   locale: Locale,
   path: string,
   title: string,
   description: string,
 ): Metadata {
+  const url = publicUrl(locale, path);
+  const brand = tr(locale, brandName, arabicBrandName);
+  const socialTitle = path ? `${title} | ${brand}` : title;
   return {
-    metadataBase: new URL("https://aw-re.com"),
-    title,
+    metadataBase: new URL(siteOrigin),
+    title: { absolute: socialTitle },
     description,
     alternates: {
-      canonical: `/${locale}${path}`,
-      languages: {
-        en: `/en${path}`,
-        ar: `/ar${path}`,
-        "x-default": `/en${path}`,
-      },
+      canonical: url,
+      languages: languageAlternates(path),
     },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
-      url: `/${locale}${path}`,
+      url,
       locale: locale === "ar" ? "ar_YE" : "en_US",
       alternateLocale: locale === "ar" ? "en_US" : "ar_YE",
       type: "website",
-      siteName: "AW-RE Tech",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+      siteName: brandName,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: brandName }],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
-      images: ["/opengraph-image"],
+      images: [{ url: "/opengraph-image", alt: brandName }],
     },
   };
 }
 export function defaultDescription(l: Locale) {
   return tr(
     l,
-    "AW-RE Tech builds practical software, AI automation, data systems, and digital solutions for businesses and organizations.",
-    "أوري تك تطوّر البرمجيات وحلول الذكاء الاصطناعي والأتمتة وأنظمة البيانات والحلول الرقمية للشركات والمؤسسات.",
+    "AW-RE Tech is a technology company based in Sana’a, Yemen. We build custom software, AI automation, dashboards and IT solutions for businesses.",
+    "أوري تك (AW-RE Tech) شركة تقنية في صنعاء، اليمن، تقدم تطوير البرمجيات المخصصة، وأتمتة الأعمال بالذكاء الاصطناعي، ولوحات البيانات وحلول تقنية المعلومات.",
   );
 }
